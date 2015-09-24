@@ -35,7 +35,7 @@ palette(viridis(8))
 
 ## Log my data pretty
 
-Log transformations are very often used in data analysis, primarily to acheive a normal distribution when faced with a skewed distribution. Remember, that the assumption of normality applies to the *residuals* of your model, ***not*** the *raw data* itself, so just because your data are themselves skewed, does not necessarily mean you need to apply a log transformation (or other); although in reality this would be highly suggestive that such a transformation will be required.
+Log transformations ([logarithms](https://en.wikipedia.org/wiki/Logarithm) to give them their full name) are very often used in data analysis, primarily to acheive a normal distribution when faced with a skewed distribution. Remember, that the assumption of normality applies to the *residuals* of your model, ***not*** the *raw data* itself, so just because your data are themselves skewed, does not necessarily mean you need to apply a log transformation (or other); although in reality this would be highly suggestive that such a transformation will be required.
 
 The application of log transformations to data is often undertaken without much thought as to what the transformation actually acheives, beyond taking what we have been trained to spot as an awful looking skewed distribution, and making it into what expect a pretty, normal distribution to look like for our analyses. Bear in mind though that rushing to transform your raw data is not a good way to start, and many analyses (such as some Generalised Linear Models) are designed to handle the transformation internally, so you dont want to go double transformating your data inadvertently.
 
@@ -100,7 +100,7 @@ Log transformations clearly change the magnitude of numbers. We saw this above w
 # read in the data
 mydata <- read.csv("brain-data.csv", header = T )
 
-# Im going to conver to kilograms so we get some numbers less than 1 for this example
+# Im going to convert to kilograms so we get some numbers less than 1 for this example
 mydata$brain <- mydata$brain / 100
 mydata$body <- mydata$body / 100
 
@@ -138,14 +138,41 @@ This is fundamental property of logs and why they work as they do. What is happe
 
 In graphical terms, this takes the vole and read warbler and moves them further apart (1 unit rather than 0.09) and moves the blue whale and orca closer together (1 unit rather than 90000).
 
+## But I prefer watching cartoons to all this maths
 
-## Let me tell you about the birds and mammals
-One then needs to bear this in mind when interpreting differences on log transformed data. Take this comparison between the body masses of some birds and mammals (not a great comparison from an insight point of view, but it makes the point).
+You can visualise this transformation with an animation of the transition for our approximate animal body masses.
+
+```{r, message=FALSE}
+
+# load required libraries
+library(berryFunctions)
+library(animation)
+
+# a series of log10 body masses to consider
+log.y <- -2:5 
+
+# their kg counterparts
+y <- 10 ^ log.y
+
+# plot and animate the transition
+saveGIF(linLogTrans(y, log.y, base=10, steps=100), interval = 0.2, 
+        movie.name = "animated-log.gif" )
+
+```
+
+![alt text](animated-log.gif "Animated log transformation")
+
+What we see here is an animation of the body mass data from our table above (voles to whales). The y-axis indicates the $log_{10}$ body masses. The x-axis starts off with the points located on the raw kilogram scale with all the small ones bunched up, and then skewed with a long tail out towards the bigger animals that get progressively further apart. The data points on the x-axis then move towards their ultimate position on their corresponding $log_{10}$ scale while retaining their labelling in kilograms. This animation starts at time `t = 0` and progresses to conclusion somewhere arbitrarily around 't = 316'. The notation `x^(1/t)` just refers to the animation process of where `x` is at time `t` of the animation process. What you can see to whales). On the y-axis is the $log_{10}$ transformed body mass. The raw data start off on the x-axis where they would be on raw data scale. The yellow vertical lines let you see how the body mass for large animals become compressed, while the smaller body masses get stretched out during the transformation.
+
+
+## Its time for that talk on the birds and er... mammals
+One then needs to bear this in mind when interpreting differences on log transformed data. Take this comparison between the body masses of some birds and mammals (not a great comparison from an insight point of view, but it makes the point). 
 
 ```{r}
 
 # boxplot to see how the birds and mammals compare
-boxplot(log10(mydata$body) ~ mydata$class)
+# Note how to get R to render the log10 notation in the y axis label using the function expression().
+boxplot(log10(mydata$body) ~ mydata$class, bty = "L", las = 1, ylab = expression(log[10](body~mass~(kg))), xlab = "Class")
 
 # calculate the means
 mu <- tapply(log10(mydata$body), mydata$class, mean)
@@ -157,7 +184,27 @@ points(1:2, mu, pch = 19, col = 1)
 
 In this example, the birds have a mean log10 body mass of 0.4 while the mammals are 2.3. In real terms, this converts to the birds having a mean body mass of $10^{0.4} = 2.5g$ and the mammals $10^{2.3}=200$. The difference between the two on the log scale is $2.3 - 0.4 = 1.9$. Interpreting this on the actual bioligically meaningful scale of kilgrams, which means that there is a proportional difference of $10^1.9 \approx 79$ between the mammals and birds. So, the mammals, at 199.5Kg are approximatately 79 times the body mass of birds (give or take some rounding errors we have let creep in here): $2.5 * 79 = 197.5 \approx 200$ or alternatively, the birds are 79 times smaller than the mammals $197.5 / 79 = 2.5$.
 
-In more general terms, a difference of $\Delta X$ between two numbers on the log10 scale translates into a proportional difference on the raw data scale of $10^{\Delta X}$
+In more general terms, a difference of $\Delta X$ between two numbers on the $log_{10}$ scale translates into a proportional difference on the raw data scale of $10^{\Delta X}$
+
+## Doing maths with logs
+As we just saw with the example of what differences between two numbers on log scale means on the raw scale, there are some key mathematical properties of logs that are worth noting. It would be worth while to try these out by swapping in some real numbers for my lazy a's and b's... and bear in mind the base might change should you find yourself using the natural log $Ln = \log_{e}$ as will happen internally in some Generalised Linear Models.
+
+- $log_{10}(a) + log_{10}(b) = log_{10}(a*b) = 10^{a*b}$
+- $log_{10}(a) - log_{10}(b) = log_{10}(a/b) = 10^{a/b}$
+- $log_{10}(a^b) = b*log_{10}(a)$
+- $log_{10}(a+b) = 10^{a+b} = 10^{a}*10^{b}$ 
+    - N.B. this one is ***really*** important for understanding linear regressions on log-transformed data.
+
+
+## (Re-) Capitulation
+
+- log transformations are commonly used to "fix" skewed data and make them normal(-ish).
+- they are not magic.
+- logs take differences between numbers (data) that are on a *multiplicative* scale, and turn them into differences on an *additive* scale.
+    - they move numbers that are small further apart
+    - they move numbers that are big closer together
+    - differences on a logarthmic scale become proportional on the linear (raw) scale
+- If in doubt, do some maths on a piece of paper with R close by to help you!
 
 
 
