@@ -141,7 +141,7 @@ In graphical terms, this takes the vole and read warbler and moves them further 
 
 ## But I prefer watching cartoons to all this maths
 
-You can visualise this transformation with an animation of the transition for our approximate animal body masses.
+You can visualise this transformation with an animation of the transition (courtesy of the authors of the `berryFunctions` package) for our approximate animal body masses.
 
 ```{r, message=FALSE}
 
@@ -190,10 +190,10 @@ In more general terms, a difference of $\Delta X$ between two numbers on the $lo
 ## Doing maths with logs
 As we just saw with the example of what differences between two numbers on log scale means on the raw scale, there are some key mathematical properties of logs that are worth noting. It would be worth while to try these out by swapping in some real numbers for my `a`'s and `b`'s... and bear in mind the base might change should you find yourself using the natural log $\ln() = \log_{e}()$ as will happen internally in some Generalised Linear Models.
 
-- $log_{10}(a) + log_{10}(b) = log_{10}(a*b) = 10^{a*b}$
-- $log_{10}(a) - log_{10}(b) = log_{10}(a/b) = 10^{a/b}$
+- $log_{10}(a) + log_{10}(b) = log_{10}(a*b)$
+- $log_{10}(a) - log_{10}(b) = log_{10}(a/b)$
 - $log_{10}(a^b) = b*log_{10}(a)$
-- $log_{10}(a+b) = 10^{a+b} = 10^{a}*10^{b}$ 
+- $10^{a+b} = 10^{a}*10^{b}$ 
     - N.B. this one is ***really*** important for understanding linear regressions on log-transformed data.
 
 
