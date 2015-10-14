@@ -22,7 +22,8 @@ knitr::opts_chunk$set(collapse = TRUE, comment = "#>",
 set.seed(1)
 
 # load the viridis package for pretty and accessible colours especially for those with 
-# colour blindness.
+# colour blindness. You will need to install this if you dont have it already using
+# install.packages("viridis")
 library(viridis)
 
 # Here I create a palette of 8 colours from the viridis spectrum. I can then access these colours
@@ -146,6 +147,8 @@ You can visualise this transformation with an animation of the transition (court
 ```{r, message=FALSE}
 
 # load required libraries
+# install them if necessary (more than likely you wont have them)
+# install.packages(c("berryFunctions","animation"))
 library(berryFunctions)
 library(animation)
 
