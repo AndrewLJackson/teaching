@@ -57,9 +57,9 @@ This slide **should** have two columns of variable width
 
 *** {name: right}
 
-- point 4
-- point 5
-- point 6
+> - point 4
+> - point 5
+> - point 6
 
 --- &caption
 test caption only

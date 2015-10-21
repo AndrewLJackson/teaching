@@ -15,3 +15,6 @@ knit        : slidify::knit2slides
 ## Some content
 blah blah
 
+
+
+![plot of chunk unnamed-chunk-2](assets/fig/unnamed-chunk-2-1.png) 

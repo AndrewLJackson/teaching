@@ -52,14 +52,14 @@ But now with log transformed data on the x and y axes
 ## Spherical cows
 
 *** {name: left}
-- How does mass of a sphere change with length?
-- $Volume = \frac{4}{3} * \pi 8 r ^ 3$
-- $Volume = (4/(3*9) * \pi * L^3$
-- Again, $Volume$, and hence $Mass$ changes with $Length^3$
-- So, generally we have...
-- $Volume = (some number) * L^3$
-- $Volume = a * L ^ b$
-- Where for isometric scaling of $Volume$ (or $Mass$) with $Length$, $b = 3$
+> - How does mass of a sphere change with length?
+> - $Volume = \frac{4}{3} * \pi * r ^ 3$
+> - $Volume = \frac{4}{3} * \pi * \frac{L^3}{2^3} = \frac{4}{3*9} * \pi * L^3$
+> - Again, $Volume$, and hence $Mass$ changes with $Length^3$
+> - So, generally we have...
+> - $Volume = (some ~ number) * L^3$
+> - $Volume = a * L ^ b$
+> - Where for isometric scaling of $Volume$ (or $Mass$) with $Length$, $b = 3$
 
 *** {name: right}
 <img src="assets/img/SphericalCow2.gif" href="https://commons.wikimedia.org/wiki/File:SphericalCow2.gif#/media/File:SphericalCow2.gif">
@@ -67,19 +67,22 @@ But now with log transformed data on the x and y axes
 --- .class #id 
 
 ## A general equation for scaling of Mass to Length
-- $Mass = a * Length ^ b$
-- Take the Log of both sides (doesnt matter what logarithmic base)
-   - $\log(M) = \log(a * L ^ 3)$
-   - $\log(M) = \log(a) + \log(L^b)$
-   - $\log(M) = \log(a) + b * \log(L)$
-   - $Y = b_0 + b_1 * X$
-   - where... $\log(a) = b_0$
-   - so... $a = e^{b_0}$
-   - and... $b_1 = b$ and is simply the power in the allometric equation
-   
+> - $Mass = a * Length ^ b$
+> - Take the Log of both sides (doesnt matter what logarithmic base)
+> - $\log(M) = \log(a * L ^ 3)$
+> - $\log(M) = \log(a) + \log(L^b)$
+> - $\log(M) = \log(a) + b * \log(L)$
+> - $Y = b_0 + b_1 * X$
+> - where... $\log(a) = b_0$
+> - so... $a = e^{b_0}$
+> - and... $b_1 = b$ and is simply the power in the allometric equation
+
+
 --- .class #id 
 
-##  INSERT EXAMPLE MASS VS LENGTH RELATIONSHIP FROM FISHBASE
+##  Mass - Length scaling in Finish Fish
+![plot of chunk unnamed-chunk-3](assets/fig/unnamed-chunk-3-1.png) 
+
 
 --- &two-cols w1:18% w2:78%
 

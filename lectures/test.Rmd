@@ -15,3 +15,44 @@ knit        : slidify::knit2slides
 ## Some content
 blah blah
 
+```{r, echo = FALSE}
+# set some global knitr build options, notably the default figure size
+knitr::opts_chunk$set(collapse = TRUE, comment = "#-", 
+                      fig.width = 5, fig.height = 5)
+
+# load the viridis package for pretty and accessible colours especially for those with 
+# colour blindness. You will need to install this if you dont have it already using
+# install.packages("viridis")
+library(viridis)
+
+# Here I create a palette of 8 colours from the viridis spectrum. I can then access these colours
+# within plotting commands by e.g. plot(0,0, col = 1), or plot(0,0, col = 4) or plot(0,0, col = 8).
+# This palette is also useful as it will print clearly in greyscale without any extra effort.
+# see vignette for viridis for more details.
+palette(viridis(8))
+
+```
+
+```{r, fig.width = 7, fig.height = 5, echo = FALSE}
+
+# read in the data
+mydata <- read.csv("assets/data/brain-data.csv", header = T )
+
+# Im going to convert to kilograms so we get some numbers less 
+# than 1 for this example
+mydata$brain <- mydata$brain / 1000
+mydata$body <- mydata$body / 1000
+
+# plot the log transformed data as a scatter plot
+plot(log10(mydata$body), log10(mydata$brain),
+     pch = 19, las = 1, bty = "L",
+     xlab = expression(log[10](body~mass~kg)),
+     ylab = expression(log[10](brain~mass~kg)),
+     cex.lab = 1.3,
+     cex.axis = 1.2,
+     col = 4)
+abline(glm(log10(brain)~log10(body), data = mydata), col = 1 )
+
+
+
+```

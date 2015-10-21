@@ -113,13 +113,13 @@
   <article data-timings="">
       
 <div class='left' style='float:left;width:58%'>
- <ul>
+ <ul class = "build incremental">
 <li>How does mass of a sphere change with length?</li>
-<li>\(Volume = \frac{4}{3} * \pi 8 r ^ 3\)</li>
-<li>\(Volume = (4/(3*9) * \pi * L^3\)</li>
+<li>\(Volume = \frac{4}{3} * \pi * r ^ 3\)</li>
+<li>\(Volume = \frac{4}{3} * \pi * \frac{L^3}{2^3} = \frac{4}{3*9} * \pi * L^3\)</li>
 <li>Again, \(Volume\), and hence \(Mass\) changes with \(Length^3\)</li>
 <li>So, generally we have...</li>
-<li>\(Volume = (some number) * L^3\)</li>
+<li>\(Volume = (some ~ number) * L^3\)</li>
 <li>\(Volume = a * L ^ b\)</li>
 <li>Where for isometric scaling of \(Volume\) (or \(Mass\)) with \(Length\), \(b = 3\)</li>
 </ul>
@@ -140,11 +140,9 @@
     <h2>A general equation for scaling of Mass to Length</h2>
   </hgroup>
   <article data-timings="">
-    <ul>
+    <ul class = "build incremental">
 <li>\(Mass = a * Length ^ b\)</li>
-<li>Take the Log of both sides (doesnt matter what logarithmic base)
-
-<ul>
+<li>Take the Log of both sides (doesnt matter what logarithmic base)</li>
 <li>\(\log(M) = \log(a * L ^ 3)\)</li>
 <li>\(\log(M) = \log(a) + \log(L^b)\)</li>
 <li>\(\log(M) = \log(a) + b * \log(L)\)</li>
@@ -152,18 +150,24 @@
 <li>where... \(\log(a) = b_0\)</li>
 <li>so... \(a = e^{b_0}\)</li>
 <li>and... \(b_1 = b\) and is simply the power in the allometric equation</li>
-</ul></li>
 </ul>
-
-<p>--- .class #id </p>
-
-<h2>INSERT EXAMPLE MASS VS LENGTH RELATIONSHIP FROM FISHBASE</h2>
 
   </article>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-7" style="background:;">
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Mass - Length scaling in Finish Fish</h2>
+  </hgroup>
+  <article data-timings="">
+    <p><img src="assets/fig/unnamed-chunk-3-1.png" alt="plot of chunk unnamed-chunk-3"> </p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-8" style="background:;">
   <hgroup>
     <h2>Two Column Layout</h2>
   </hgroup>
@@ -234,8 +238,14 @@
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=7 title='Two Column Layout'>
+        data-slide=7 title='Mass - Length scaling in Finish Fish'>
          7
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=8 title='Two Column Layout'>
+         8
       </a>
     </li>
   </ul>
