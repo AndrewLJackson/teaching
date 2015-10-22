@@ -13,7 +13,9 @@
     media="only screen and (max-device-width: 480px)" >
   <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
   <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />
-  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="./assets/css/ribbons.css"></link>
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="libraries/widgets/bootstrap/css/bootstrap.css"></link>
+<link rel=stylesheet href="libraries/widgets/quiz/css/demo.css"></link>
+<link rel=stylesheet href="./assets/css/ribbons.css"></link>
 
   
   <!-- Grab CDN jQuery, fall back to local if offline -->
@@ -156,20 +158,223 @@
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="class" id="id" style="background:;">
+<slide class="" id="slide-7" style="background:;">
   <hgroup>
-    <h2>Mass - Length scaling in Finish Fish</h2>
+    <h2>What do these coefficients mean? - Intercept</h2>
   </hgroup>
   <article data-timings="">
-    <p><img src="assets/fig/unnamed-chunk-3-1.png" alt="plot of chunk unnamed-chunk-3"> </p>
+      
+<div class='left' style='float:left;width:68%'>
+ <ul class = "build incremental">
+<li>on a log-log scale what does the intercept mean?</li>
+<li>\(\log(M) = b_0 + b_1 * \log(L)\)</li>
+<li>the intercept is the coefficient, or multiplier of \(Length\)</li>
+<li>\(M = e^{b_0} * Length ^ b_1\)</li>
+<li>Recall that spheres and cubes only differ in their coefficients</li>
+<li>\(Volume_{cube} = [1] * L^3\)</li>
+<li>\(Volume_{sphere} = [\frac{4}{3*9} * \pi] * L^3\)</li>
+<li>So, \(b_0\), our intercept, which in the allometric equation is \(e^{b_0}\) 
+tells us that the shapes differ between two species, and in some ways might tell
+us how</li>
+</ul>
+
+</div>    
+<div class='right' style='float:right;width:28%'>
+ <p><img src="assets/img/cod-and-plaice.jpg"></p>
+
+</div>
+
 
   </article>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-8" style="background:;">
+<slide class="class" id="id" style="background:;">
   <hgroup>
-    <h2>Two Column Layout</h2>
+    <h2>What do these coefficients mean? - Slope</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>If the coefficient of \(Length\) is exactly 3, then the fish are growing 
+isometrically and staying exactly the same shape. that is their width and depth 
+is growing in proportion to their length.</p>
+
+<p><img src="assets/img/cod-isometric.jpg"></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>What do these coefficients mean? - Slope</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>If the coefficient of \(Length\) is less than 3, then the fish are putting on less 
+mass than you would predict which means their width and/or depth is not 
+increasing in proportion to their length and they are becoming thinner as they 
+get longer.</p>
+
+<p><img src="assets/img/cod-thinner.jpg"></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>What do these coefficients mean? - Slope</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>If the coefficient of \(Length\) is greater than 3, then the fish are putting on 
+more mass than you would predict which means their width and/or depth is not 
+increasing in proportion to their length and they are becoming broader as they 
+get longer.</p>
+
+<p><img src="assets/img/cod-fatter.jpg"></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-11">
+<hgroup>
+  <h2>Mass - Length scaling in Finnish Fish</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<p><img src="assets/fig/unnamed-chunk-3-1.png" alt="plot of chunk unnamed-chunk-3"> </p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="" id="slide-12" style="background:;">
+  <hgroup>
+    <h2>Question</h2>
+  </hgroup>
+  <article data-timings="">
+    
+<div class="quiz quiz-single well ">
+  <p>With a scaling relationship of \(Mass = 0.01 * Length ^ {3.15}\), is mass scaling:</p>
+
+<ol>
+<li>Isometrically</li>
+<li><em>Faster</em></li>
+<li>Slower</li>
+</ol>
+
+  <button class="quiz-submit btn btn-primary">Submit</button>
+  <button class="quiz-toggle-hint btn btn-info">Show Hint</button>
+  <button class="quiz-show-answer btn btn-success">Show Answer</button>
+  <button class="quiz-clear btn btn-danger">Clear</button>
+  
+  <div class="quiz-hint">
+  <p>Isometric scaling for mass which is directly proportional to volume would be to power 3</p>
+
+</div>
+<div class="quiz-explanation">
+  <p>3.15 is larger than 3, so these fish are putting on more mass for a given length as they get larger.</p>
+
+</div>
+</div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-13" style="background:;">
+  <hgroup>
+    <h2>Exactly how much of an increase?</h2>
+  </hgroup>
+  <article data-timings="">
+      
+<div class='left' style='float:left;width:48%'>
+ <ul class = "build incremental">
+<li>This is just a linear equation</li>
+<li>\(\log_{10}(M) = -2.01 + 3.15 * \log_{10}(L)\)</li>
+<li>so a one unit increase in \(\log_{10}(M)\) leads to a 3.15 unit increase 
+in \(\log_{10}(L)\)</li>
+<li>but these are in \(\log_{10}\) units...</li>
+</ul>
+
+</div>    
+<div class='right' style='float:right;width:48%'>
+ <p><img src="assets/fig/unnamed-chunk-4-1.png" alt="plot of chunk unnamed-chunk-4"> </p>
+
+</div>
+
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-14" style="background:;">
+  <hgroup>
+    <h2>Question</h2>
+  </hgroup>
+  <article data-timings="">
+    
+<div class="quiz quiz-single well ">
+  <p>If \(\log_{10}(Mass)\) increases by one unit, how much does mass increase by?</p>
+
+<ol>
+<li>+ 10 grams</li>
+<li>+ 9 grams</li>
+<li><em>10 times larger</em></li>
+<li>100 times larger</li>
+</ol>
+
+  <button class="quiz-submit btn btn-primary">Submit</button>
+  <button class="quiz-toggle-hint btn btn-info">Show Hint</button>
+  <button class="quiz-show-answer btn btn-success">Show Answer</button>
+  <button class="quiz-clear btn btn-danger">Clear</button>
+  
+  <div class="quiz-hint">
+  <p>\(10 = \log_{10}(1)\)</p>
+
+</div>
+<div class="quiz-explanation">
+  <p>If we consider we have \(y = \log_{10}(x)\) and add one \(y\) then we have \(y + 1 = 1 + \log_{10}(x)\) which is 
+equal to \(y + 1 = \log_{10}(10) + \log_{10}(x)\) which by applying the rule <code>log of product is sum of logs</code> 
+gives us \(y + 1 = \log_{10}(10 * x)\). So, a one unit increase in \(y\) which reprents \(\log_{10}(x)\) results in an increase in \(x\) by a multiplication of 10. </p>
+
+</div>
+</div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-15" style="background:;">
+  <hgroup>
+    <h2>Exactly how much of an increase?</h2>
+  </hgroup>
+  <article data-timings="">
+      
+<div class='left' style='float:left;width:48%'>
+ <ul class = "build incremental">
+<li>\(\log_{10}(M) = -2.01 + 3.15 * \log_{10}(L)\)</li>
+<li>so a one unit increase in \(\log_{10}(M)\) leads to a 3.15 unit increase 
+in \(\log_{10}(L)\)</li>
+<li>which translates into: every 10-fold increase in \(Length\) results in a 
+\(10^{3.15} = 1413\) proportional increase in \(Mass\).</li>
+<li>So \(L \mapsto 10*L\) means 
+\(M \mapsto 10^{3.15} * M = 1413 * M\)</li>
+<li>or, which might make more sense in this scale of data, a 0.1 or 10% increase 
+in \(Length\) results in a \(10^{0.315} = 2.1 \approx 2\) which is an<br>
+approximate doubling in \(Mass\)</li>
+</ul>
+
+</div>    
+<div class='right' style='float:right;width:48%'>
+ <p><img src="assets/fig/unnamed-chunk-5-1.png" alt="plot of chunk unnamed-chunk-5"> </p>
+
+</div>
+
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-16" style="background:;">
+  <hgroup>
+    <h2>Brain - Body mass scatterplot</h2>
   </hgroup>
   <article data-timings="">
     <p>This slide <strong>should</strong> have two columns of variable width </p>
@@ -188,6 +393,8 @@
 <li>point 5</li>
 <li>point 6</li>
 </ul>
+
+<pre><code></code></pre>
 
 </div>
 
@@ -238,14 +445,62 @@
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=7 title='Mass - Length scaling in Finish Fish'>
+        data-slide=7 title='What do these coefficients mean? - Intercept'>
          7
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=8 title='Two Column Layout'>
+        data-slide=8 title='What do these coefficients mean? - Slope'>
          8
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=9 title='What do these coefficients mean? - Slope'>
+         9
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=10 title='What do these coefficients mean? - Slope'>
+         10
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=11 title='Mass - Length scaling in Finnish Fish'>
+         11
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=12 title='Question'>
+         12
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=13 title='Exactly how much of an increase?'>
+         13
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=14 title='Question'>
+         14
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=15 title='Exactly how much of an increase?'>
+         15
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=16 title='Brain - Body mass scatterplot'>
+         16
       </a>
     </li>
   </ul>
@@ -257,7 +512,12 @@
   <![endif]-->
 </body>
   <!-- Load Javascripts for Widgets -->
-  
+  <script src="libraries/widgets/bootstrap/js/bootstrap.min.js"></script>
+<script src="libraries/widgets/bootstrap/js/bootbox.min.js"></script>
+<script src="libraries/widgets/quiz/js/jquery.quiz.js"></script>
+<script src="libraries/widgets/quiz/js/mustache.min.js"></script>
+<script src="libraries/widgets/quiz/js/quiz-app.js"></script>
+
   <!-- MathJax: Fall back to local if CDN offline but local image fonts are not supported (saves >100MB) -->
   <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
@@ -272,7 +532,14 @@
   </script> -->
   <script>window.MathJax || document.write('<script type="text/x-mathjax-config">MathJax.Hub.Config({"HTML-CSS":{imageFont:null}});<\/script><script src="libraries/widgets/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"><\/script>')
 </script>
-<!-- LOAD HIGHLIGHTER JS FILES -->
+<script>  
+  $(function (){ 
+    $("#example").popover(); 
+    $("[rel='tooltip']").tooltip(); 
+  });  
+  </script>  
+  
+  <!-- LOAD HIGHLIGHTER JS FILES -->
   <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
   <script>hljs.initHighlightingOnLoad();</script>
   <!-- DONE LOADING HIGHLIGHTER JS FILES -->
