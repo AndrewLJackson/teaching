@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />
   <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="libraries/widgets/bootstrap/css/bootstrap.css"></link>
 <link rel=stylesheet href="libraries/widgets/quiz/css/demo.css"></link>
+<link rel=stylesheet href="./assets/css/lectures.css"></link>
 <link rel=stylesheet href="./assets/css/ribbons.css"></link>
 
   
@@ -44,24 +45,18 @@
 
     <!-- SLIDES -->
     <slide class="" id="slide-1" style="background:;">
+  <hgroup>
+    <h2>Still just linear regression</h2>
+  </hgroup>
   <article data-timings="">
-    
+    <p>But now with log transformed data on the x and y axes</p>
+
+<p><img src="assets/fig/unnamed-chunk-2-1.png" alt="plot of chunk unnamed-chunk-2"> </p>
+
   </article>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-2">
-<hgroup>
-  <h2>Still just linear regression</h2>
-</hgroup>
-<article class = 'flexbox vcenter'>
-<p>But now with log transformed data on the x and y axes</p>
-
-<p><img src="assets/fig/unnamed-chunk-2-1.png" alt="plot of chunk unnamed-chunk-2"> </p>
-
-</article>
-<!-- Presenter Notes -->
-</slide>
 <slide class="class" id="id" style="background:;">
   <hgroup>
     <h2>Focus on length-mass relationships</h2>
@@ -108,7 +103,7 @@
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-5" style="background:;">
+<slide class="" id="slide-4" style="background:;">
   <hgroup>
     <h2>Spherical cows</h2>
   </hgroup>
@@ -158,7 +153,7 @@
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-7" style="background:;">
+<slide class="" id="slide-6" style="background:;">
   <hgroup>
     <h2>What do these coefficients mean? - Intercept</h2>
   </hgroup>
@@ -169,7 +164,7 @@
 <li>on a log-log scale what does the intercept mean?</li>
 <li>\(\log(M) = b_0 + b_1 * \log(L)\)</li>
 <li>the intercept is the coefficient, or multiplier of \(Length\)</li>
-<li>\(M = e^{b_0} * Length ^ b_1\)</li>
+<li>\(M = e^{b_0} * Length ^ {b_1}\)</li>
 <li>Recall that spheres and cubes only differ in their coefficients</li>
 <li>\(Volume_{cube} = [1] * L^3\)</li>
 <li>\(Volume_{sphere} = [\frac{4}{3*9} * \pi] * L^3\)</li>
@@ -236,7 +231,7 @@ get longer.</p>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-11">
+<slide class="" id="slide-10">
 <hgroup>
   <h2>Mass - Length scaling in Finnish Fish</h2>
 </hgroup>
@@ -246,7 +241,7 @@ get longer.</p>
 </article>
 <!-- Presenter Notes -->
 </slide>
-<slide class="" id="slide-12" style="background:;">
+<slide class="" id="slide-11" style="background:;">
   <hgroup>
     <h2>Question</h2>
   </hgroup>
@@ -279,7 +274,7 @@ get longer.</p>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-13" style="background:;">
+<slide class="" id="slide-12" style="background:;">
   <hgroup>
     <h2>Exactly how much of an increase?</h2>
   </hgroup>
@@ -305,7 +300,7 @@ in \(\log_{10}(L)\)</li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-14" style="background:;">
+<slide class="" id="slide-13" style="background:;">
   <hgroup>
     <h2>Question</h2>
   </hgroup>
@@ -341,7 +336,7 @@ gives us \(y + 1 = \log_{10}(10 * x)\). So, a one unit increase in \(y\) which r
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-15" style="background:;">
+<slide class="" id="slide-14" style="background:;">
   <hgroup>
     <h2>Exactly how much of an increase?</h2>
   </hgroup>
@@ -372,32 +367,133 @@ approximate doubling in \(Mass\)</li>
   <!-- Presenter Notes -->
 </slide>
 
+<slide class="" id="slide-15" style="background:yellow;">
+  <hgroup>
+    <h2>Brain size</h2>
+  </hgroup>
+  <article data-timings="">
+      
+<div class='left' style='float:left;width:48%'>
+ <p><img src="https://upload.wikimedia.org/wikipedia/commons/f/f4/Porte_musc_Profil_2.jpg" alt="alt text"></p>
+
+</div>    
+<div class='right' style='float:right;width:48%'>
+ <p><img src="https://upload.wikimedia.org/wikipedia/commons/1/16/Herrerasaurus_Skull_FMNH.JPG" alt="alt text"></p>
+
+</div>
+
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
 <slide class="" id="slide-16" style="background:;">
   <hgroup>
     <h2>Brain - Body mass scatterplot</h2>
   </hgroup>
   <article data-timings="">
-    <p>This slide <strong>should</strong> have two columns of variable width </p>
-  
-<div class='left' style='float:left;width:18%'>
- <ul>
-<li>point 1</li>
-<li>point 2</li>
-<li>point 3</li>
+      
+<div class='left' style='float:left;width:48%'>
+ <ul class = "build incremental">
+<li>Now we are not modelling \(Mass \sim Length\)</li>
+<li>but rather \(Mass \sim Mass\)</li>
 </ul>
 
 </div>    
-<div class='right' style='float:right;width:78%'>
- <ul>
-<li>point 4</li>
-<li>point 5</li>
-<li>point 6</li>
-</ul>
-
-<pre><code></code></pre>
+<div class='right' style='float:right;width:48%'>
+ <p><img src="assets/fig/unnamed-chunk-6-1.png" alt="plot of chunk unnamed-chunk-6"> </p>
 
 </div>
 
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-17" style="background:;">
+  <hgroup>
+    <h2>Question</h2>
+  </hgroup>
+  <article data-timings="">
+    
+<div class="quiz quiz-single well ">
+  <p>What exponent would we expect \(b\) to take in this equation if \(brain mass\) scales 
+isometrically with \(body mass\)?</p>
+
+<ol>
+<li><em>1</em></li>
+<li>2</li>
+<li>3</li>
+<li>4</li>
+</ol>
+
+  <button class="quiz-submit btn btn-primary">Submit</button>
+  <button class="quiz-toggle-hint btn btn-info">Show Hint</button>
+  <button class="quiz-show-answer btn btn-success">Show Answer</button>
+  <button class="quiz-clear btn btn-danger">Clear</button>
+  
+  <div class="quiz-hint">
+  <p>Both brain mass and body mass are on the same scale of grams or kilograms 
+(or similar), so if one of them doubles, what would you expect the other to do
+if it was scaling at the same rate?</p>
+
+</div>
+<div class="quiz-explanation">
+  <p>If brain size increases at the same rate as body size, we would expect the 
+proportion of body mass that is brain mass to remain the same regardless of 
+the size of the organisms. That is, \(Mass_{brain} = a * Mass_{body} ^ 1\) or more
+simply \(Mass_{brain} = a * Mass_{body}\) where \(a\) is the proportion of body mass 
+that is brain mass or simply the ratio \(a = \frac{Mass_{brain}}{Mass_{body}}\)</p>
+
+</div>
+</div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-18" style="background:;">
+  <hgroup>
+    <h2>Brain - Body mass scatterplot</h2>
+  </hgroup>
+  <article data-timings="">
+      
+<div class='left' style='float:left;width:48%'>
+ <ul class = "build incremental">
+<li>So, a sensible model is \(Mass_{brain} = a * Mass_{body} ^ 1\)</li>
+<li>which on log10 transformed data would mean we expect the 
+coefficient of \(\log10(Mass_{body})\) to be \(1\). </li>
+<li>In reality, would you expect this value to be greater than, equal to, or 
+less than \(1\)?</li>
+<li>what are the biological reasons that might govern this relationship?</li>
+</ul>
+
+</div>    
+<div class='right' style='float:right;width:48%'>
+ <p><img src="assets/fig/unnamed-chunk-7-1.png" alt="plot of chunk unnamed-chunk-7"> </p>
+
+</div>
+
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Common allometric relationships</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>\(Length \propto Mass^{\frac{1}{3}}\)</li>
+<li>\(Surface Area \propto Mass^{\frac{2}{3}}\)</li>
+<li>\(Metabolic Rate \propto Mass^{\frac{3}{4}}\)</li>
+<li>\(Breathing rate or Heart rate \propto Mass^{\frac{1}{4}}\)</li>
+<li>\(Abundance \propto Mass_{body}^{\frac{3}{4}}\)
+
+<ul>
+<li><a href="http://dx.doi.org/10.1126%2Fscience.1204337">except parasites, which are weird!</a></li>
+</ul></li>
+</ul>
 
   </article>
   <!-- Presenter Notes -->
@@ -409,43 +505,43 @@ approximate doubling in \(Mass\)</li>
     <ul>
       <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=1 title='NA'>
+        data-slide=1 title='Still just linear regression'>
          1
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=2 title='Still just linear regression'>
+        data-slide=2 title='Focus on length-mass relationships'>
          2
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=3 title='Focus on length-mass relationships'>
+        data-slide=3 title='Scaling of simple shapes'>
          3
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=4 title='Scaling of simple shapes'>
+        data-slide=4 title='Spherical cows'>
          4
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=5 title='Spherical cows'>
+        data-slide=5 title='A general equation for scaling of Mass to Length'>
          5
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=6 title='A general equation for scaling of Mass to Length'>
+        data-slide=6 title='What do these coefficients mean? - Intercept'>
          6
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=7 title='What do these coefficients mean? - Intercept'>
+        data-slide=7 title='What do these coefficients mean? - Slope'>
          7
       </a>
     </li>
@@ -463,37 +559,37 @@ approximate doubling in \(Mass\)</li>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=10 title='What do these coefficients mean? - Slope'>
+        data-slide=10 title='Mass - Length scaling in Finnish Fish'>
          10
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=11 title='Mass - Length scaling in Finnish Fish'>
+        data-slide=11 title='Question'>
          11
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=12 title='Question'>
+        data-slide=12 title='Exactly how much of an increase?'>
          12
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=13 title='Exactly how much of an increase?'>
+        data-slide=13 title='Question'>
          13
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=14 title='Question'>
+        data-slide=14 title='Exactly how much of an increase?'>
          14
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=15 title='Exactly how much of an increase?'>
+        data-slide=15 title='Brain size'>
          15
       </a>
     </li>
@@ -501,6 +597,24 @@ approximate doubling in \(Mass\)</li>
       <a href="#" target="_self" rel='tooltip' 
         data-slide=16 title='Brain - Body mass scatterplot'>
          16
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=17 title='Question'>
+         17
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=18 title='Brain - Body mass scatterplot'>
+         18
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=19 title='Common allometric relationships'>
+         19
       </a>
     </li>
   </ul>

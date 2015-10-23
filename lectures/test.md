@@ -12,6 +12,7 @@ knit        : slidify::knit2slides
 ---
 
 
+
 ## Some content
 blah blah
 

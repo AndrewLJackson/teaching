@@ -11,7 +11,6 @@ mode        : selfcontained # {standalone, draft}
 knit        : slidify::knit2slides
 ---
 
---- &vcenter
 
 ## Still just linear regression
 But now with log transformed data on the x and y axes
@@ -86,7 +85,7 @@ But now with log transformed data on the x and y axes
 > - on a log-log scale what does the intercept mean?
 > - $\log(M) = b_0 + b_1 * \log(L)$
 > - the intercept is the coefficient, or multiplier of $Length$
-> - $M = e^{b_0} * Length ^ b_1$
+> - $M = e^{b_0} * Length ^ {b_1}$
 > - Recall that spheres and cubes only differ in their coefficients
 > - $Volume_{cube} = [1] * L^3$
 > - $Volume_{sphere} = [\frac{4}{3*9} * \pi] * L^3$
@@ -202,23 +201,80 @@ approximate doubling in $Mass$
 
 ![plot of chunk unnamed-chunk-5](assets/fig/unnamed-chunk-5-1.png) 
 
---- &two-cols w1:18% w2:78%
+--- &two-cols w1:48% w2:48% bg:yellow
+## Brain size
 
-## Brain - Body mass scatterplot  
-
-This slide **should** have two columns of variable width 
 
 *** {name: left}
 
-- point 1
-- point 2
-- point 3
+![alt text](https://upload.wikimedia.org/wikipedia/commons/f/f4/Porte_musc_Profil_2.jpg)
 
 *** {name: right}
 
-- point 4
-- point 5
-- point 6
+![alt text](https://upload.wikimedia.org/wikipedia/commons/1/16/Herrerasaurus_Skull_FMNH.JPG)
 
-```
+--- &two-cols w1:48% w2:48%
 
+## Brain - Body mass scatterplot  
+
+
+*** {name: left}
+
+> - Now we are not modelling $Mass \sim Length$
+> - but rather $Mass \sim Mass$
+
+*** {name: right}
+
+![plot of chunk unnamed-chunk-6](assets/fig/unnamed-chunk-6-1.png) 
+
+--- &radio
+## Question
+
+What exponent would we expect $b$ to take in this equation if $brain mass$ scales 
+isometrically with $body mass$?
+
+1. _1_
+2. 2
+3. 3
+4. 4
+
+*** .hint
+Both brain mass and body mass are on the same scale of grams or kilograms 
+(or similar), so if one of them doubles, what would you expect the other to do
+if it was scaling at the same rate?
+
+*** .explanation
+If brain size increases at the same rate as body size, we would expect the 
+proportion of body mass that is brain mass to remain the same regardless of 
+the size of the organisms. That is, $Mass_{brain} = a * Mass_{body} ^ 1$ or more
+simply $Mass_{brain} = a * Mass_{body}$ where $a$ is the proportion of body mass 
+that is brain mass or simply the ratio $a = \frac{Mass_{brain}}{Mass_{body}}$
+
+--- &two-cols w1:48% w2:48%
+
+## Brain - Body mass scatterplot  
+
+
+*** {name: left}
+
+> - So, a sensible model is $Mass_{brain} = a * Mass_{body} ^ 1$
+> - which on log10 transformed data would mean we expect the 
+coefficient of $\log10(Mass_{body})$ to be $1$. 
+> - In reality, would you expect this value to be greater than, equal to, or 
+less than $1$?
+> - what are the biological reasons that might govern this relationship?
+
+*** {name: right}
+
+![plot of chunk unnamed-chunk-7](assets/fig/unnamed-chunk-7-1.png) 
+
+--- .class #id 
+
+## Common allometric relationships
+
+- $Length \propto Mass^{\frac{1}{3}}$
+- $Surface Area \propto Mass^{\frac{2}{3}}$
+- $Metabolic Rate \propto Mass^{\frac{3}{4}}$
+- $Breathing rate or Heart rate \propto Mass^{\frac{1}{4}}$
+- $Abundance \propto Mass_{body}^{\frac{3}{4}}$
+    - [except parasites, which are weird!](http://dx.doi.org/10.1126%2Fscience.1204337)

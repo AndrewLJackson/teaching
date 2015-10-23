@@ -1,0 +1,296 @@
+---
+title       : Simple Linear Regression
+subtitle    : Drawing straight lines through data
+author      : Andrew Jackson
+job         : Associate Professor
+framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
+highlighter : highlight.js  # {highlight.js, prettify, highlight}
+hitheme     : tomorrow      # 
+widgets     : [mathjax, bootstrap, quiz]            # {mathjax, quiz, bootstrap}
+mode        : selfcontained # {standalone, draft}
+knit        : slidify::knit2slides
+---
+
+--- &two-cols w1:48% w2:48%
+
+## Scatter plot data
+
+*** {name: left}
+
+> - How are two measures related?
+> - Are they correlated?
+> - Can one explain variation in the other?
+> - What is the relationship?
+> - Can I make new predictions using the relationship?
+
+*** {name: right}
+
+```{r, fig.width = 7, fig.height = 6, echo = FALSE}
+
+# Author: Andrew Jackson
+# Date: 08/10/2014
+# About: An example R script that generates some random data according to a
+# linear model and illustrates how you can gain insight into such relationships
+# using the pairs() function, and also how you can interrogate the residuals
+# of the corresponding fitted linear model for a posteriori insight.
+
+library(viridis)
+palette(viridis(8))
+
+# Set the seed for the random number generator
+set.seed(2)
+
+# close all open graphics windows and remove all prior objects from the memory.
+rm(list=ls())
+
+# Create some randomly distributed x values representing predator/prey body mass
+x <- runif(50,100,5000) / 1000
+
+# generate some y values according to a linear model. Here, they have
+# slope = 1, intercept = 1 and Gaussian (normal) random noise added with
+# mean = 1 and standard deviation = 1. These y values represent the
+# Interaction Strengths of the coupled predator-prey nodes in our 
+# theoretical ecological community.
+y <- 1.2*x + 1 + rnorm(50,0,1)
+
+plot(x,y,
+      ylab="Interaction Strength", xlab="Relative body mass (Predator/Prey)",
+      las=1,bty="L",cex.lab=1.3,cex.axis=1.3, pch = 19, col = 5)
+
+```
+
+--- &two-cols w1:48% w2:48%
+
+## Are they correlated?
+
+*** {name: left}
+
+> - Both x and y data show variation
+> - Question is: do they co-vary (vary together)?
+   - Are large $x$ values associated with large $y$ values?
+   - or are large $x$ values associated with small $y$ values?
+> - Calculate a statistics falle the correlation coefficient ($r$) which 
+takes values $-1 \leq r \leq +1$
+> - test $r$ against a statistical distribution to get a p-value using 
+`cor.test()`
+
+*** {name: right}
+
+```{r, fig.width = 7, fig.height = 6, echo = FALSE}
+# This function is used to put histograms on the diagonal
+panel.hist <- function(x, ...)
+{
+    usr <- par("usr"); on.exit(par(usr))
+    par(usr = c(usr[1:2], 0, 1.5) )
+    h <- hist(x, plot = FALSE)
+    breaks <- h$breaks; nB <- length(breaks)
+    y <- h$counts; y <- y/max(y)
+    rect(breaks[-nB], 0, breaks[-1], y, col=6, ...)
+}
+
+# This function is used to put (absolute) correlations on the upper panels,
+# with size of the text proportional to the correlations.
+panel.cor <- function(x, y, digits=2, prefix="", cex.cor, ...)
+{
+    usr <- par("usr"); on.exit(par(usr))
+    par(usr = c(0, 1, 0, 1))
+    r <- abs(cor(x, y))
+    txt <- format(c(r, 0.123456789), digits=digits)[1]
+    txt <- paste(prefix, txt, sep="")
+    if(missing(cex.cor)) cex.cor <- 0.8/strwidth(txt)
+    text(0.5, 0.5, txt, cex = cex.cor * r)
+}
+
+# Here we create a dataframe object called "dat" which labels the x and y
+# variables appropriately. The function pairs() needs the data as either a 
+# dataframe or matrix type object.
+dat <- data.frame(Relative.Body.Size = x, Interaction.Strength = y)
+
+
+# create a new plotting window and call the pairs() function with the customised
+# functions we defined above to make it more informative than the defaults. 
+# The function panel.smooth() is in-built in R.
+suppressWarnings(pairs(dat,
+      upper.panel=panel.smooth,
+      lower.panel=panel.cor,
+      diag.panel=panel.hist,
+      col.smooth = 2, pch = 19)
+      )
+```
+
+
+--- 
+
+## Let's ask a different question
+
+> - Instead of...
+> - Is there a relationship between $x$ and $y$
+> - I want to know...
+> - What _is_ the relationship between $x$ and $y$
+> - Need to fit a line through the data and we can use this to describe what the 
+relationship is, both verbally and mathematically
+
+--- 
+
+## A straight line
+```{r, fig.width = 9, fig.height = 6, echo = FALSE}
+# Add the null hypothesis line which is a horizontal line at the mean of
+# all the data.    
+plot(x, y,
+      ylab="Interaction Strength", xlab="Relative body size(Predator/Prey)",
+      las = 1, bty = "L", 
+      cex.lab = 1.3, cex.axis = 1.3, col = 5, pch = 19)
+
+m1 <- lm(y~x) # fit a linear model of y against x
+abline(m1, col = 2, lwd = 2, lty = 1)
+
+```
+
+---
+
+## A null hypothesis
+```{r, fig.width = 9, fig.height = 6, echo = FALSE}
+# Add the null hypothesis line which is a horizontal line at the mean of
+# all the data.    
+plot(x, y,
+      ylab="Interaction Strength", xlab="Relative body size(Predator/Prey)",
+      las = 1, bty = "L", 
+      cex.lab = 1.3, cex.axis = 1.3, col = 5, pch = 19)
+
+m1 <- lm(y~x) # fit a linear model of y against x
+abline(m1, col = 2, lwd = 2, lty = 1)
+
+abline(mean(y), 0, col = 7, lwd = 3, lty = 2)     
+```
+
+--- &two-cols w1:58% w2:38%
+
+## Residuals
+
+*** {name: left}
+
+```{r, fig.width = 9, fig.height = 6, echo = FALSE}
+# Add the null hypothesis line which is a horizontal line at the mean of
+# all the data.    
+plot(x, y,
+      ylab="Interaction Strength", xlab="Relative body size(Predator/Prey)",
+      las = 1, bty = "L", 
+      cex.lab = 1.3, cex.axis = 1.3, col = 5, pch = 19)
+
+m1 <- lm(y~x) # fit a linear model of y against x
+abline(m1, col = 2, lwd = 2, lty = 1)
+
+# extract the residuals from the linear model m1
+rsd <- resid(m1)
+
+# find the index address of the smallest (most negative) and largest residuals.
+mn <- which.min(rsd)
+mx <- which.max(rsd)
+
+# add red lines connecting them to the corresponding estimated value from the 
+# linear model which is extracted from the m1 object by calling fitted().
+lines(c(x[mn],x[mn]), c(y[mn],fitted(m1)[mn]), col = 2, lwd = 2, lty = 2)
+lines(c(x[mx],x[mx]), c(fitted(m1)[mx],y[mx]), col = 2, lwd = 2, lty = 2)
+
+```
+
+*** {name: right}
+
+> - Computer fits the line by minimising the residuals off the line
+>- Strictly (for least squares fitting), it minimises the sum of the squares
+of the residuals
+> - $\sum (y_i - \hat{y_i}) ^ 2$
+
+
+
+---
+
+## Residuals are informative
+> - tells us which data are larger than predicted, and which are lower
+> - Should ideally be normally distributed around the line
+> - Test this with visual plots like histograms or q-q plots
+> - Should be evenly spread around the line with no obvious trend
+
+--- &two-cols w1:48% w2:48%
+
+## Back to our line
+
+
+*** {name: left}
+
+> -  This figure shows how much algal growth occurs in one week in freshwater 
+lakes of varying pollution levels
+> -  It would be useful for us to know how much pollution affects algal growth
+> -  It would also be useful if we could make predictions for growth rates in 
+lakes we havent been able to observe such as:
+> -  pristine unpolluted lakes
+> -  or lake with exactly 2.2 mg/L pollution.
+
+*** {name: right}
+
+```{r, fig.width = 8, fig.height = 8, echo = FALSE}
+# create some sample data for working on in lectures
+
+# manually set the random number generator to start from same place each time
+set.seed(100)
+
+# ------------------------------------------------------------------------------
+# create a line of the form y = b0 + (b1 * x)
+
+# the intercept of the lines
+b0 <- 50
+
+# the slope of the lines
+b1 <- -3
+
+# some x data on which to base the line
+x <- 1:11
+
+# number of data points to create
+n <- length(x)
+
+# create some random data with slope b1 and standard deviation 3
+y1 <- b0 + b1*x + rnorm(n,0,3)
+
+# create some random data with slope b1 and standard deviation 10
+y2 <- b0 + b1*x + rnorm(n,0,10)
+
+# create some random data with slope 0 and standard deviation 3
+y3 <- b0 + 0*x + rnorm(n,0,1)
+
+# create some random data with slope 0 and standard deviation 10
+y4 <- b0 + 0*x + rnorm(n,0,10)
+
+# find the min and max y values across all the four lines so we can 
+# plot them neatly below on the exact same scales
+min.y <- min(c(y1,y2,y3,y4))
+max.y <- max(c(y1,y2,y3,y4))
+
+# use the glm() function to find the best fit line to each of the four
+# sets of data. I will explain this in more detail later in the module.
+model1 <- glm(y1~x)
+model2 <- glm(y2~x)
+model3 <- glm(y3~x)
+model4 <- glm(y4~x)
+
+plot(x, y2, 
+     type="p", cex=1.3, lwd=2, 
+     ylim=c(min.y-1,max.y+1),
+     xlim = c(0, 12),
+     xlab="Pollutant (mg/L)",
+     ylab="growth (mm)", 
+     bty = "L", las = 1,
+     cex.lab = 1.3, cex.axis = 1.3,
+     col = 5, pch = 19)
+
+abline(model2,lwd=2,lty=2, col = 2)
+
+
+```
+
+--- 
+
+## Find the equation of the line
+
+
+
