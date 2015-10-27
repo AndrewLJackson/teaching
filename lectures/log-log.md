@@ -129,7 +129,26 @@ get longer.
 --- &vcenter
 
 ##  Mass - Length scaling in Finnish Fish
-![plot of chunk unnamed-chunk-3](assets/fig/unnamed-chunk-3-1.png) 
+
+```
+## Downloading GitHub repo ramnathv/slidify@master
+## Installing slidify
+## Skipping 1 packages ahead of CRAN: knitr
+## '/Library/Frameworks/R.framework/Resources/bin/R' --no-site-file  \
+##   --no-environ --no-save --no-restore CMD INSTALL  \
+##   '/private/var/folders/vy/55xqt7rj06x42z3flsb6vylc0000gn/T/RtmpTO18LM/devtools14bea34e063f7/ramnathv-slidify-1dd41a3'  \
+##   --library='/Library/Frameworks/R.framework/Versions/3.2/Resources/library'  \
+##   --install-tests 
+## 
+## Reloading installed slidify
+## Downloading GitHub repo ramnathv/slidifyLibraries@master
+## Installing slidifyLibraries
+## '/Library/Frameworks/R.framework/Resources/bin/R' --no-site-file  \
+##   --no-environ --no-save --no-restore CMD INSTALL  \
+##   '/private/var/folders/vy/55xqt7rj06x42z3flsb6vylc0000gn/T/RtmpTO18LM/devtools14bea25529d86/ramnathv-slidifyLibraries-dbd065f'  \
+##   --library='/Library/Frameworks/R.framework/Versions/3.2/Resources/library'  \
+##   --install-tests
+```
 
 
 --- &radio
@@ -186,8 +205,8 @@ gives us $y + 1 = \log_{10}(10 * x)$. So, a one unit increase in $y$ which repre
 *** {name: left}
 
 > - $\log_{10}(M) = -2.01 + 3.15 * \log_{10}(L)$
-> - so a one unit increase in $\log_{10}(M)$ leads to a 3.15 unit increase 
-in $\log_{10}(L)$
+> - so a one unit increase in $\log_{10}(L)$ leads to a 3.15 unit increase 
+in $\log_{10}(M)$
 > - which translates into: every 10-fold increase in $Length$ results in a 
 $10^{3.15} = 1413$ proportional increase in $Mass$.
 > - So $L \mapsto 10*L$ means 

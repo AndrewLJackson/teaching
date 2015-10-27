@@ -236,7 +236,24 @@ get longer.</p>
   <h2>Mass - Length scaling in Finnish Fish</h2>
 </hgroup>
 <article class = 'flexbox vcenter'>
-<p><img src="assets/fig/unnamed-chunk-3-1.png" alt="plot of chunk unnamed-chunk-3"> </p>
+<pre><code>## Downloading GitHub repo ramnathv/slidify@master
+## Installing slidify
+## Skipping 1 packages ahead of CRAN: knitr
+## &#39;/Library/Frameworks/R.framework/Resources/bin/R&#39; --no-site-file  \
+##   --no-environ --no-save --no-restore CMD INSTALL  \
+##   &#39;/private/var/folders/vy/55xqt7rj06x42z3flsb6vylc0000gn/T/RtmpTO18LM/devtools14bea34e063f7/ramnathv-slidify-1dd41a3&#39;  \
+##   --library=&#39;/Library/Frameworks/R.framework/Versions/3.2/Resources/library&#39;  \
+##   --install-tests 
+## 
+## Reloading installed slidify
+## Downloading GitHub repo ramnathv/slidifyLibraries@master
+## Installing slidifyLibraries
+## &#39;/Library/Frameworks/R.framework/Resources/bin/R&#39; --no-site-file  \
+##   --no-environ --no-save --no-restore CMD INSTALL  \
+##   &#39;/private/var/folders/vy/55xqt7rj06x42z3flsb6vylc0000gn/T/RtmpTO18LM/devtools14bea25529d86/ramnathv-slidifyLibraries-dbd065f&#39;  \
+##   --library=&#39;/Library/Frameworks/R.framework/Versions/3.2/Resources/library&#39;  \
+##   --install-tests
+</code></pre>
 
 </article>
 <!-- Presenter Notes -->
@@ -345,8 +362,8 @@ gives us \(y + 1 = \log_{10}(10 * x)\). So, a one unit increase in \(y\) which r
 <div class='left' style='float:left;width:48%'>
  <ul class = "build incremental">
 <li>\(\log_{10}(M) = -2.01 + 3.15 * \log_{10}(L)\)</li>
-<li>so a one unit increase in \(\log_{10}(M)\) leads to a 3.15 unit increase 
-in \(\log_{10}(L)\)</li>
+<li>so a one unit increase in \(\log_{10}(L)\) leads to a 3.15 unit increase 
+in \(\log_{10}(M)\)</li>
 <li>which translates into: every 10-fold increase in \(Length\) results in a 
 \(10^{3.15} = 1413\) proportional increase in \(Mass\).</li>
 <li>So \(L \mapsto 10*L\) means 
