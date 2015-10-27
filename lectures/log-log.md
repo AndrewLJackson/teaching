@@ -53,7 +53,10 @@ But now with log transformed data on the x and y axes
 *** {name: left}
 > - How does mass of a sphere change with length?
 > - $Volume = \frac{4}{3} * \pi * r ^ 3$
-> - $Volume = \frac{4}{3} * \pi * \frac{L^3}{2^3} = \frac{4}{3*9} * \pi * L^3$
+> - It is more normal to measure the length, not radius of an animal so...
+> - $Volume = \frac{4}{3} * \pi * \frac{L^3}{2^3}$ 
+> - $Volume= \frac{4}{3} * \pi * (\frac{L}{2})^3
+= \frac{4}{3*8} * \pi * L^3$
 > - Again, $Volume$, and hence $Mass$ changes with $Length^3$
 > - So, generally we have...
 > - $Volume = (some ~ number) * L^3$
@@ -68,12 +71,13 @@ But now with log transformed data on the x and y axes
 ## A general equation for scaling of Mass to Length
 > - $Mass = a * Length ^ b$
 > - Take the Log of both sides (doesnt matter what logarithmic base)
-> - $\log(M) = \log(a * L ^ 3)$
+> - $\log(M) = \log(a * L ^ b)$
 > - $\log(M) = \log(a) + \log(L^b)$
 > - $\log(M) = \log(a) + b * \log(L)$
+> - which is the equation of a line
 > - $Y = b_0 + b_1 * X$
 > - where... $\log(a) = b_0$
-> - so... $a = e^{b_0}$
+> - so... $a = 10^{b_0}$ (assuming we are using logs in base 10)
 > - and... $b_1 = b$ and is simply the power in the allometric equation
 
 --- &two-cols w1:68% w2:28%
@@ -85,11 +89,11 @@ But now with log transformed data on the x and y axes
 > - on a log-log scale what does the intercept mean?
 > - $\log(M) = b_0 + b_1 * \log(L)$
 > - the intercept is the coefficient, or multiplier of $Length$
-> - $M = e^{b_0} * Length ^ {b_1}$
+> - $M = 10^{b_0} * Length ^ {b_1}$ (again assuming base 10)
 > - Recall that spheres and cubes only differ in their coefficients
 > - $Volume_{cube} = [1] * L^3$
-> - $Volume_{sphere} = [\frac{4}{3*9} * \pi] * L^3$
-> - So, $b_0$, our intercept, which in the allometric equation is $e^{b_0}$ 
+> - $Volume_{sphere} = [\frac{4}{3*8} * \pi] * L^3$
+> - So, $b_0$, our intercept, which in the allometric equation is $10^{b_0}$ 
 tells us that the shapes differ between two species, and in some ways might tell
 us how
 
@@ -100,7 +104,7 @@ us how
 --- .class #id 
 
 ##  What do these coefficients mean? - Slope
-If the coefficient of $Length$ is exactly 3, then the fish are growing 
+If the coefficient of $\log_{10}(Length)$ is exactly 3, then the fish are growing 
 isometrically and staying exactly the same shape. that is their width and depth 
 is growing in proportion to their length.
 
@@ -109,7 +113,7 @@ is growing in proportion to their length.
 --- .class #id 
 
 ##  What do these coefficients mean? - Slope
-If the coefficient of $Length$ is less than 3, then the fish are putting on less 
+If the coefficient of $\log_{10}(Length)$ is less than 3, then the fish are putting on less 
 mass than you would predict which means their width and/or depth is not 
 increasing in proportion to their length and they are becoming thinner as they 
 get longer.
@@ -119,7 +123,7 @@ get longer.
 --- .class #id 
 
 ##  What do these coefficients mean? - Slope
-If the coefficient of $Length$ is greater than 3, then the fish are putting on 
+If the coefficient of $\log_{10}(Length)$ is greater than 3, then the fish are putting on 
 more mass than you would predict which means their width and/or depth is not 
 increasing in proportion to their length and they are becoming broader as they 
 get longer.
@@ -131,24 +135,10 @@ get longer.
 ##  Mass - Length scaling in Finnish Fish
 
 ```
-## Downloading GitHub repo ramnathv/slidify@master
-## Installing slidify
-## Skipping 1 packages ahead of CRAN: knitr
-## '/Library/Frameworks/R.framework/Resources/bin/R' --no-site-file  \
-##   --no-environ --no-save --no-restore CMD INSTALL  \
-##   '/private/var/folders/vy/55xqt7rj06x42z3flsb6vylc0000gn/T/RtmpTO18LM/devtools14bea34e063f7/ramnathv-slidify-1dd41a3'  \
-##   --library='/Library/Frameworks/R.framework/Versions/3.2/Resources/library'  \
-##   --install-tests 
-## 
-## Reloading installed slidify
-## Downloading GitHub repo ramnathv/slidifyLibraries@master
-## Installing slidifyLibraries
-## '/Library/Frameworks/R.framework/Resources/bin/R' --no-site-file  \
-##   --no-environ --no-save --no-restore CMD INSTALL  \
-##   '/private/var/folders/vy/55xqt7rj06x42z3flsb6vylc0000gn/T/RtmpTO18LM/devtools14bea25529d86/ramnathv-slidifyLibraries-dbd065f'  \
-##   --library='/Library/Frameworks/R.framework/Versions/3.2/Resources/library'  \
-##   --install-tests
+## Scalable Robust Estimators with High Breakdown Point (version 1.3-8)
 ```
+
+![plot of chunk unnamed-chunk-3](assets/fig/unnamed-chunk-3-1.png) 
 
 
 --- &radio
@@ -172,9 +162,10 @@ Isometric scaling for mass which is directly proportional to volume would be to 
 *** {name: left}
 > - This is just a linear equation
 > - $\log_{10}(M) = -2.01 + 3.15 * \log_{10}(L)$
-> - so a one unit increase in $\log_{10}(M)$ leads to a 3.15 unit increase 
-in $\log_{10}(L)$
+> - so a one unit increase in $\log_{10}(L)$ leads to a 3.15 unit increase 
+in $\log_{10}(M)$
 > - but these are in $\log_{10}$ units...
+> - ... and in raw terms means a proportional (multiplicative) increase.
 
 
 *** {name: right}
@@ -184,7 +175,7 @@ in $\log_{10}(L)$
 --- &radio
 ## Question
 
-If $\log_{10}(Mass)$ increases by one unit, how much does mass increase by?
+If $\log_{10}(Length)$ increases by one unit, how much does $Length$ increase by?
 
 1. + 10 grams
 2. + 9 grams
@@ -221,7 +212,7 @@ approximate doubling in $Mass$
 ![plot of chunk unnamed-chunk-5](assets/fig/unnamed-chunk-5-1.png) 
 
 --- &two-cols w1:48% w2:48% bg:yellow
-## Brain size
+## Return to brain size evolution
 
 
 *** {name: left}
@@ -249,8 +240,8 @@ approximate doubling in $Mass$
 --- &radio
 ## Question
 
-What exponent would we expect $b$ to take in this equation if $brain mass$ scales 
-isometrically with $body mass$?
+What exponent would we expect $b$ to take in this equation if $brain ~ mass$ scales 
+isometrically with $body ~ mass$?
 
 1. _1_
 2. 2
@@ -277,8 +268,8 @@ that is brain mass or simply the ratio $a = \frac{Mass_{brain}}{Mass_{body}}$
 *** {name: left}
 
 > - So, a sensible model is $Mass_{brain} = a * Mass_{body} ^ 1$
-> - which on log10 transformed data would mean we expect the 
-coefficient of $\log10(Mass_{body})$ to be $1$. 
+> - which on $\log_{10}$ transformed data would mean we expect the 
+coefficient of $\log_{10}(Mass_{body})$ to be $1$. 
 > - In reality, would you expect this value to be greater than, equal to, or 
 less than $1$?
 > - what are the biological reasons that might govern this relationship?

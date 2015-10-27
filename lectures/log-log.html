@@ -113,7 +113,10 @@
  <ul class = "build incremental">
 <li>How does mass of a sphere change with length?</li>
 <li>\(Volume = \frac{4}{3} * \pi * r ^ 3\)</li>
-<li>\(Volume = \frac{4}{3} * \pi * \frac{L^3}{2^3} = \frac{4}{3*9} * \pi * L^3\)</li>
+<li>It is more normal to measure the length, not radius of an animal so...</li>
+<li>\(Volume = \frac{4}{3} * \pi * \frac{L^3}{2^3}\) </li>
+<li>\(Volume= \frac{4}{3} * \pi * (\frac{L}{2})^3
+= \frac{4}{3*8} * \pi * L^3\)</li>
 <li>Again, \(Volume\), and hence \(Mass\) changes with \(Length^3\)</li>
 <li>So, generally we have...</li>
 <li>\(Volume = (some ~ number) * L^3\)</li>
@@ -140,12 +143,13 @@
     <ul class = "build incremental">
 <li>\(Mass = a * Length ^ b\)</li>
 <li>Take the Log of both sides (doesnt matter what logarithmic base)</li>
-<li>\(\log(M) = \log(a * L ^ 3)\)</li>
+<li>\(\log(M) = \log(a * L ^ b)\)</li>
 <li>\(\log(M) = \log(a) + \log(L^b)\)</li>
 <li>\(\log(M) = \log(a) + b * \log(L)\)</li>
+<li>which is the equation of a line</li>
 <li>\(Y = b_0 + b_1 * X\)</li>
 <li>where... \(\log(a) = b_0\)</li>
-<li>so... \(a = e^{b_0}\)</li>
+<li>so... \(a = 10^{b_0}\) (assuming we are using logs in base 10)</li>
 <li>and... \(b_1 = b\) and is simply the power in the allometric equation</li>
 </ul>
 
@@ -164,11 +168,11 @@
 <li>on a log-log scale what does the intercept mean?</li>
 <li>\(\log(M) = b_0 + b_1 * \log(L)\)</li>
 <li>the intercept is the coefficient, or multiplier of \(Length\)</li>
-<li>\(M = e^{b_0} * Length ^ {b_1}\)</li>
+<li>\(M = 10^{b_0} * Length ^ {b_1}\) (again assuming base 10)</li>
 <li>Recall that spheres and cubes only differ in their coefficients</li>
 <li>\(Volume_{cube} = [1] * L^3\)</li>
-<li>\(Volume_{sphere} = [\frac{4}{3*9} * \pi] * L^3\)</li>
-<li>So, \(b_0\), our intercept, which in the allometric equation is \(e^{b_0}\) 
+<li>\(Volume_{sphere} = [\frac{4}{3*8} * \pi] * L^3\)</li>
+<li>So, \(b_0\), our intercept, which in the allometric equation is \(10^{b_0}\) 
 tells us that the shapes differ between two species, and in some ways might tell
 us how</li>
 </ul>
@@ -189,7 +193,7 @@ us how</li>
     <h2>What do these coefficients mean? - Slope</h2>
   </hgroup>
   <article data-timings="">
-    <p>If the coefficient of \(Length\) is exactly 3, then the fish are growing 
+    <p>If the coefficient of \(\log_{10}(Length)\) is exactly 3, then the fish are growing 
 isometrically and staying exactly the same shape. that is their width and depth 
 is growing in proportion to their length.</p>
 
@@ -204,7 +208,7 @@ is growing in proportion to their length.</p>
     <h2>What do these coefficients mean? - Slope</h2>
   </hgroup>
   <article data-timings="">
-    <p>If the coefficient of \(Length\) is less than 3, then the fish are putting on less 
+    <p>If the coefficient of \(\log_{10}(Length)\) is less than 3, then the fish are putting on less 
 mass than you would predict which means their width and/or depth is not 
 increasing in proportion to their length and they are becoming thinner as they 
 get longer.</p>
@@ -220,7 +224,7 @@ get longer.</p>
     <h2>What do these coefficients mean? - Slope</h2>
   </hgroup>
   <article data-timings="">
-    <p>If the coefficient of \(Length\) is greater than 3, then the fish are putting on 
+    <p>If the coefficient of \(\log_{10}(Length)\) is greater than 3, then the fish are putting on 
 more mass than you would predict which means their width and/or depth is not 
 increasing in proportion to their length and they are becoming broader as they 
 get longer.</p>
@@ -236,24 +240,10 @@ get longer.</p>
   <h2>Mass - Length scaling in Finnish Fish</h2>
 </hgroup>
 <article class = 'flexbox vcenter'>
-<pre><code>## Downloading GitHub repo ramnathv/slidify@master
-## Installing slidify
-## Skipping 1 packages ahead of CRAN: knitr
-## &#39;/Library/Frameworks/R.framework/Resources/bin/R&#39; --no-site-file  \
-##   --no-environ --no-save --no-restore CMD INSTALL  \
-##   &#39;/private/var/folders/vy/55xqt7rj06x42z3flsb6vylc0000gn/T/RtmpTO18LM/devtools14bea34e063f7/ramnathv-slidify-1dd41a3&#39;  \
-##   --library=&#39;/Library/Frameworks/R.framework/Versions/3.2/Resources/library&#39;  \
-##   --install-tests 
-## 
-## Reloading installed slidify
-## Downloading GitHub repo ramnathv/slidifyLibraries@master
-## Installing slidifyLibraries
-## &#39;/Library/Frameworks/R.framework/Resources/bin/R&#39; --no-site-file  \
-##   --no-environ --no-save --no-restore CMD INSTALL  \
-##   &#39;/private/var/folders/vy/55xqt7rj06x42z3flsb6vylc0000gn/T/RtmpTO18LM/devtools14bea25529d86/ramnathv-slidifyLibraries-dbd065f&#39;  \
-##   --library=&#39;/Library/Frameworks/R.framework/Versions/3.2/Resources/library&#39;  \
-##   --install-tests
+<pre><code>## Scalable Robust Estimators with High Breakdown Point (version 1.3-8)
 </code></pre>
+
+<p><img src="assets/fig/unnamed-chunk-3-1.png" alt="plot of chunk unnamed-chunk-3"> </p>
 
 </article>
 <!-- Presenter Notes -->
@@ -301,9 +291,10 @@ get longer.</p>
  <ul class = "build incremental">
 <li>This is just a linear equation</li>
 <li>\(\log_{10}(M) = -2.01 + 3.15 * \log_{10}(L)\)</li>
-<li>so a one unit increase in \(\log_{10}(M)\) leads to a 3.15 unit increase 
-in \(\log_{10}(L)\)</li>
+<li>so a one unit increase in \(\log_{10}(L)\) leads to a 3.15 unit increase 
+in \(\log_{10}(M)\)</li>
 <li>but these are in \(\log_{10}\) units...</li>
+<li class='..'>and in raw terms means a proportional (multiplicative) increase.</li>
 </ul>
 
 </div>    
@@ -324,7 +315,7 @@ in \(\log_{10}(L)\)</li>
   <article data-timings="">
     
 <div class="quiz quiz-single well ">
-  <p>If \(\log_{10}(Mass)\) increases by one unit, how much does mass increase by?</p>
+  <p>If \(\log_{10}(Length)\) increases by one unit, how much does \(Length\) increase by?</p>
 
 <ol>
 <li>+ 10 grams</li>
@@ -386,7 +377,7 @@ approximate doubling in \(Mass\)</li>
 
 <slide class="" id="slide-15" style="background:yellow;">
   <hgroup>
-    <h2>Brain size</h2>
+    <h2>Return to brain size evolution</h2>
   </hgroup>
   <article data-timings="">
       
@@ -434,8 +425,8 @@ approximate doubling in \(Mass\)</li>
   <article data-timings="">
     
 <div class="quiz quiz-single well ">
-  <p>What exponent would we expect \(b\) to take in this equation if \(brain mass\) scales 
-isometrically with \(body mass\)?</p>
+  <p>What exponent would we expect \(b\) to take in this equation if \(brain ~ mass\) scales 
+isometrically with \(body ~ mass\)?</p>
 
 <ol>
 <li><em>1</em></li>
@@ -477,8 +468,8 @@ that is brain mass or simply the ratio \(a = \frac{Mass_{brain}}{Mass_{body}}\)<
 <div class='left' style='float:left;width:48%'>
  <ul class = "build incremental">
 <li>So, a sensible model is \(Mass_{brain} = a * Mass_{body} ^ 1\)</li>
-<li>which on log10 transformed data would mean we expect the 
-coefficient of \(\log10(Mass_{body})\) to be \(1\). </li>
+<li>which on \(\log_{10}\) transformed data would mean we expect the 
+coefficient of \(\log_{10}(Mass_{body})\) to be \(1\). </li>
 <li>In reality, would you expect this value to be greater than, equal to, or 
 less than \(1\)?</li>
 <li>what are the biological reasons that might govern this relationship?</li>
@@ -606,7 +597,7 @@ less than \(1\)?</li>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=15 title='Brain size'>
+        data-slide=15 title='Return to brain size evolution'>
          15
       </a>
     </li>
