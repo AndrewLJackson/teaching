@@ -25,7 +25,7 @@ knit        : slidify::knit2slides
 
 *** {name: right}
 
-```{r, fig.width = 7, fig.height = 6, echo = FALSE}
+```{r create_interation_data, fig.width = 7, fig.height = 6, echo = FALSE}
 
 # Author: Andrew Jackson
 # Date: 08/10/2014
@@ -76,7 +76,7 @@ takes values $-1 \leq r \leq +1$
 
 *** {name: right}
 
-```{r, fig.width = 7, fig.height = 6, echo = FALSE}
+```{r pairs_plot, fig.width = 7, fig.height = 6, echo = FALSE}
 # This function is used to put histograms on the diagonal
 panel.hist <- function(x, ...)
 {
@@ -133,7 +133,7 @@ relationship is, both verbally and mathematically
 --- 
 
 ## A straight line
-```{r, fig.width = 9, fig.height = 6, echo = FALSE}
+```{r regression, fig.width = 9, fig.height = 6, echo = FALSE}
 # Add the null hypothesis line which is a horizontal line at the mean of
 # all the data.    
 plot(x, y,
@@ -149,7 +149,7 @@ abline(m1, col = 2, lwd = 2, lty = 1)
 ---
 
 ## A null hypothesis
-```{r, fig.width = 9, fig.height = 6, echo = FALSE}
+```{r null_hypothesis, fig.width = 9, fig.height = 6, echo = FALSE}
 # Add the null hypothesis line which is a horizontal line at the mean of
 # all the data.    
 plot(x, y,
@@ -169,7 +169,7 @@ abline(mean(y), 0, col = 7, lwd = 3, lty = 2)
 
 *** {name: left}
 
-```{r, fig.width = 9, fig.height = 6, echo = FALSE}
+```{r residuals, fig.width = 9, fig.height = 6, echo = FALSE}
 # Add the null hypothesis line which is a horizontal line at the mean of
 # all the data.    
 plot(x, y,
@@ -228,7 +228,7 @@ lakes we havent been able to observe such as:
 
 *** {name: right}
 
-```{r, fig.width = 8, fig.height = 8, echo = FALSE}
+```{r create_algal_data, fig.width = 8, fig.height = 8, echo = FALSE}
 # create some sample data for working on in lectures
 
 # manually set the random number generator to start from same place each time
@@ -292,5 +292,5 @@ abline(model2,lwd=2,lty=2, col = 2)
 
 ## Find the equation of the line
 
-
+!STILL TO FINISH THIS SLIDE DECK!
 
