@@ -7,7 +7,7 @@ These learning resources form part of various modules that I teach including:
 
 ## ZO4030 / BD7054 - Data Handling and Analysis
 
-- `vignettes/logs/intro-to-logs.html` - A worksheet reminding us what logs are and what it does to log-transformed data.
+- `vignettes/logs/intro-to-logs.html` - A worksheet reminding us what logs are and what log transformations do to data.
 - `lectures/log-log.html` - Log-log regression for modelling allometric and other scaling relationships.
 
 
