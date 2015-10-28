@@ -16,7 +16,7 @@ knit        : slidify::knit2slides
 But now with log transformed data on the x and y axes
 
 
-```{r, echo = FALSE}
+```{r setup, echo = FALSE}
 # set some global knitr build options, notably the default figure size
 knitr::opts_chunk$set(collapse = TRUE, comment = "#-", 
                       fig.width = 5, fig.height = 5)
@@ -34,7 +34,7 @@ palette(viridis(8))
 
 ```
 
-```{r, fig.width = 9, fig.height = 6, echo = FALSE}
+```{r brain_regression_1, fig.width = 9, fig.height = 6, echo = FALSE}
 
 # read in the data
 mydata <- read.csv("assets/data/brain-data.csv", header = T )
@@ -172,7 +172,7 @@ get longer.
 --- &vcenter
 
 ##  Mass - Length scaling in Finnish Fish
-```{r, fig.width = 9, fig.height = 6, echo = FALSE}
+```{r finnish_fish_1, fig.width = 9, fig.height = 6, echo = FALSE}
 
 library(rrcov, verbose=F, quietly=T)
 data("fish")
@@ -238,7 +238,7 @@ in $\log_{10}(M)$
 
 *** {name: right}
 
-```{r, fig.width = 9, fig.height = 6, echo = FALSE}
+```{r finnish_fish_2, fig.width = 9, fig.height = 6, echo = FALSE}
 
 with(fish[complete.cases(fish) & fish$Weight>0,],{
 
@@ -308,7 +308,7 @@ approximate doubling in $Mass$
 
 *** {name: right}
 
-```{r, fig.width = 9, fig.height = 6, echo = FALSE}
+```{r finnish_fish_3, fig.width = 9, fig.height = 6, echo = FALSE}
 
 with(fish[complete.cases(fish) & fish$Weight>0,],{
 
@@ -365,7 +365,7 @@ text(0.9, 2.5,
 
 *** {name: right}
 
-```{r, echo = FALSE}
+```{r brain_regression_2, echo = FALSE}
 # plot the log transformed data as a scatter plot
 plot(log10(mydata$body), log10(mydata$brain),
      pch = 19, las = 1, bty = "L",
@@ -418,7 +418,7 @@ less than $1$?
 
 *** {name: right}
 
-```{r, echo = FALSE}
+```{r brain_regression_3, echo = FALSE}
 # plot the log transformed data as a scatter plot
 plot(log10(mydata$body), log10(mydata$brain),
      pch = 19, las = 1, bty = "L",

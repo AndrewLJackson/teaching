@@ -18,7 +18,7 @@ But now with log transformed data on the x and y axes
 
 
 
-![plot of chunk unnamed-chunk-2](assets/fig/unnamed-chunk-2-1.png) 
+![plot of chunk brain_regression_1](assets/fig/brain_regression_1-1.png) 
 
 
 --- .class #id 
@@ -135,10 +135,10 @@ get longer.
 ##  Mass - Length scaling in Finnish Fish
 
 ```
-## Scalable Robust Estimators with High Breakdown Point (version 1.3-8)
+#- Scalable Robust Estimators with High Breakdown Point (version 1.3-8)
 ```
 
-![plot of chunk unnamed-chunk-3](assets/fig/unnamed-chunk-3-1.png) 
+![plot of chunk finnish_fish_1](assets/fig/finnish_fish_1-1.png) 
 
 
 --- &radio
@@ -170,7 +170,7 @@ in $\log_{10}(M)$
 
 *** {name: right}
 
-![plot of chunk unnamed-chunk-4](assets/fig/unnamed-chunk-4-1.png) 
+![plot of chunk finnish_fish_2](assets/fig/finnish_fish_2-1.png) 
 
 --- &radio
 ## Question
@@ -209,7 +209,7 @@ approximate doubling in $Mass$
 
 *** {name: right}
 
-![plot of chunk unnamed-chunk-5](assets/fig/unnamed-chunk-5-1.png) 
+![plot of chunk finnish_fish_3](assets/fig/finnish_fish_3-1.png) 
 
 --- &two-cols w1:48% w2:48% bg:yellow
 ## Return to brain size evolution
@@ -235,7 +235,7 @@ approximate doubling in $Mass$
 
 *** {name: right}
 
-![plot of chunk unnamed-chunk-6](assets/fig/unnamed-chunk-6-1.png) 
+![plot of chunk brain_regression_2](assets/fig/brain_regression_2-1.png) 
 
 --- &radio
 ## Question
@@ -276,7 +276,7 @@ less than $1$?
 
 *** {name: right}
 
-![plot of chunk unnamed-chunk-7](assets/fig/unnamed-chunk-7-1.png) 
+![plot of chunk brain_regression_3](assets/fig/brain_regression_3-1.png) 
 
 --- .class #id 
 
