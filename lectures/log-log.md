@@ -133,11 +133,6 @@ get longer.
 --- &vcenter
 
 ##  Mass - Length scaling in Finnish Fish
-
-```
-#- Scalable Robust Estimators with High Breakdown Point (version 1.3-8)
-```
-
 ![plot of chunk finnish_fish_1](assets/fig/finnish_fish_1-1.png) 
 
 

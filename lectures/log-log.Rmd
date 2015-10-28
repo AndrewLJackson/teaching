@@ -172,7 +172,7 @@ get longer.
 --- &vcenter
 
 ##  Mass - Length scaling in Finnish Fish
-```{r finnish_fish_1, fig.width = 9, fig.height = 6, echo = FALSE}
+```{r finnish_fish_1, fig.width = 9, fig.height = 6, echo = FALSE, message = FALSE}
 
 library(rrcov, verbose=F, quietly=T)
 data("fish")
