@@ -1,0 +1,238 @@
+---
+title: "Introduction to Model Selection using AIC with polynomials"
+author: "Andrew L Jackson"
+date: "24 November 2015"
+output: html_document
+---
+
+```{r, echo = FALSE}
+# set some global knitr build options, notably the default figure size
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>", 
+                      fig.width = 6, fig.height = 5)
+```
+
+```{r, echo = TRUE}
+
+# Start off with some house-keeping and set-up.
+
+# load the viridis package for pretty and accessible colours especially for 
+# those with colour blindness. You will need to install this if you dont have it 
+# already using install.packages("viridis")
+library(viridis)
+
+# Here I create a palette of 8 colours from the viridis spectrum. I can then 
+# access these colours within plotting commands by e.g. plot(0,0, col = 1), 
+# or plot(0,0, col = 4) or plot(0,0, col = 8). This palette is also useful as it
+# will print clearly in greyscale without any extra effort. See vignette for 
+# viridis for more details.
+palette(viridis(8))
+
+```
+
+We are going to work with a simple dataset that comprises the species richness 
+of fishing hauls (trawl fishing) of varying effort (time in minutes). These 
+data are contained in the file `curved-data.csv`.
+
+```{r, echo = TRUE}
+mydata <- read.csv("curved-data.csv", header = T, stringsAsFactors = FALSE)
+
+plot(richness ~ effort, data = mydata, bty = "L", cex.lab = 1.2, 
+     xlab = "Fishing Effort (time spent hauling in minutes)",
+     ylab = "species richness")
+
+```
+
+The aim is to fit a set of polynomial models to the data and use AIC to identify 
+the most parsimonious order polynomial. To get you started, we will first fit three 
+models: the null model, a basic linear model, and a quadratic model. There after, 
+you will fit higher order polynomials, compare their AIC and use the `predict` 
+function to generate the esimated values for adding the fitted curves to the plot.
+
+
+## The Null model (zero order polynomial)
+The null model is the most simple linear model that we might fit to some data. 
+It comprises only a mean and standard deviatoin (or variance depending on your 
+preference) for the data. Mathematically it looks like $Y = \beta_0 + \epsilon$, 
+where $\beta_0$ is the intercept and overall mean of the response variable $Y$ 
+and $\epsilon$ is the error which is defined by a variance or standard 
+deviation depending on your preference for notation.
+
+The null model is specified by the function $Y \tilde 1$ where `1` represents the 
+coefficient of the intercept which is always equal to `1` which is why we omit 
+it from the equation $Y = \beta_0 * (1) + \epsilon$. We are going to get into 
+the habit of using the `data = ` argument when we call `glm()`. This approach 
+basically creates a private environment within the function glm() where it can 
+see inside the dataframe object `mydata` and access the columns of data without 
+having to manually use the dollar sign notation `mydata$richness`. This is 
+important for a subsequent step where we will use the `predict` function.
+
+**Note** that I am now using functions within the `plot()` command in order to 
+make use of the `data =` argument that follows. This also has the benefit of 
+being consistent with how we specify the models in `glm()`.
+
+```{r, echo = TRUE}
+
+null.model <- glm(richness ~ 1, data = mydata)
+
+summary(null.model)
+
+
+# the null model is just a mean, so graphically it is a horizontal line,
+# and ordinarily we would not bother to plot it, as it is pretty much 
+# utterly uniformative.
+plot(richness ~ effort, 
+     data = mydata, 
+     bty = "L", 
+     cex.lab = 1.2, 
+     xlab = "Fishing Effort (time spent hauling in minutes)",
+     ylab = "species richness",
+     col = 1)
+
+# use abline(h=) to add a horizontal line by extracting the intercept
+# using coef() on the null.model object.
+abline(h = coef(null.model) , col = 6, lty = 2, lwd = 2)
+
+# histogram of the residuals...
+hist(resid(null.model), 15, col = 7)
+
+
+```
+
+It is important to note the AIC of this fitted model which is 
+`r round(extractAIC(null.model)[2], digits = 1)`. There is no need to check the 
+residuals of this fitted model beyond a simple histogram which shows that they 
+are not normally distributed. Clearly the line does not explain the data well, 
+and you can quickly determine that this is not a very good model of the data. 
+This is hardly surprising though given how simple it is: on to more complicated 
+models!
+
+## Simple linear model (1st order polynomial)
+We don't expect a straight line model to be much better, but its still worth 
+fitting it for completeness and by way of providing a comparison against which 
+we can test a quadratic model in the next step.
+
+```{r, echo = TRUE}
+
+first.model <- glm(richness ~ effort, data = mydata)
+
+summary(first.model)
+
+
+plot(richness ~ effort, 
+     data = mydata, 
+     bty = "L", 
+     cex.lab = 1.2, 
+     xlab = "Fishing Effort (time spent hauling in minutes)",
+     ylab = "species richness",
+     col = 1)
+
+# use abline(h=) to add a horizontal line by extracting the intercept
+# using coef() on the null.model object.
+abline(first.model , col = 6, lty = 2, lwd = 2)
+
+# create a 2-panel plotting window for the diagnostics on the 
+# residuals
+par(mfrow=c(1,2))
+# histogram of the residuals...
+hist(resid(first.model), 15, col = 7)
+
+# plot of the residuals of the line as a function of effort
+plot(resid(first.model) ~ effort, data = mydata)
+abline(h = 0 , col = 6, lty = 2, lwd = 2)
+
+
+```
+
+Again, note the AIC of this fitted model which is 
+`r round(extractAIC(first.model)[2], digits = 1)`. The residual plots are more 
+helpful to us now, but still they are neither normally distributed, nor 
+randomly scattered either side of the expected line, and show marked pattern 
+with respect to `effort`. On to a second-order polynomial.
+
+## A 2nd order polynomail linear model (a quadratic)
+
+In order to include the square of effort in the model, the easiest thing to do 
+is add a column to our dataset and include this term in our `glm()`.
+
+```{r, echo = TRUE}
+
+# add effort squared to the dataframe
+mydata$effort.2 <- mydata$effort ^ 2
+
+# now add this term to the glm
+second.model <- glm(richness ~ effort + effort.2, data = mydata)
+
+summary(second.model)
+
+par(mfrow = c(1,1))
+plot(richness ~ effort, 
+     data = mydata, 
+     bty = "L", 
+     cex.lab = 1.2, 
+     xlab = "Fishing Effort (time spent hauling in minutes)",
+     ylab = "species richness",
+     col = 1)
+
+# Now are a bit stuck. We can no longer use abline to add the model 
+# predictions as it only works with straight lines. We have 
+# use the predict function, which will take a bunch of hypothetical 
+# x values and calculate the corresponding y values based on the 
+# estimated coefficients we got by fitting our model to our data.
+# In order to do this, we need to create a set of dummy effort 
+# values for which we want to calculate the corresponding estimated 
+# richness values for plotting a nice curve.
+
+# a sequence of hypothetical effort values from 0 to 100 in steps of 1.
+# The smaller we make the step-size, the smoother the curve will appear.
+new.effort <- seq(0, 100, 1)
+
+# create a new data.frame object with columns that have the EXACT same 
+# name as in our original data. We dont need the response value though, 
+# since we are trying to estimate that using this method!
+new.data <- data.frame(effort = new.effort, 
+                       effort.2 = new.effort ^ 2)
+
+# now predict the richness based on this new data which i call y.hat
+# in reference to the mathematical notation of putting an arrow head 
+# like a hat over predicted values. Here we predict using second.model,
+# and pass it the hypothetical effort values to use to make the 
+# predictions.
+y.hat <- predict(second.model, newdata = new.data)
+
+# and finally, add this line to the plot of the data as a function of 
+# our hypothetical new.effort values
+lines(y.hat ~ new.effort, data = mydata, col = 6, lty = 2, lwd =2)
+
+# create a 2-panel plotting window for the diagnostics on the 
+# residuals
+par(mfrow=c(1,2))
+# histogram of the residuals...
+hist(resid(second.model), 15, col = 7)
+
+# plot of the residuals of the line as a function of effort
+plot(resid(second.model) ~ effort, data = mydata)
+abline(h = 0 , col = 6, lty = 2, lwd = 2)
+
+
+```
+
+Again, note the AIC of this fitted model which is 
+`r round(extractAIC(second.model)[2], digits = 1)`. The residual plots are more 
+helpful to us now. They are pretty well normally distributed and are on the 
+whole closer to zero. But they are still not randomly scattered either side of 
+the expected line, and show marked pattern with respect to `effort`. 
+
+## Tasks: fit higher order polynomials
+Your tasks for this week are as follows:
++ fit a series of higher order polynomials, from 3rd to 8th order. There is no 
+need to plot the estimated models or check the residuals for orders 4 and above. 
+But you may like to do this to see what the higher order polynomials look like. 
+In fact, it is entirely possible to write a loop in R that would automate 
+this... but I havent tried, and more often than not its a case of easier said 
+than done, but by all means take up the challenge if you like and we can help 
+you with it.
++ Compile a table of AIC values for all polynomials from 0 to 8 and make an 
+argument for which polynomial best explains the data.
+
+
+
