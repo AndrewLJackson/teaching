@@ -1,5 +1,5 @@
 ---
-title: "Introduction to Model Selection using AIC with polynomials"
+title: "Introduction to AIC-based Model Selection using polynomials"
 author: "Andrew L Jackson"
 date: "24 November 2015"
 output: html_document

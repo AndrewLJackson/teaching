@@ -1,5 +1,5 @@
 ---
-title: "Intro-to-logs"
+title: "Introduction to logarithms"
 author: "Andrew L Jackson"
 date: "24 September 2015"
 output: html_document
