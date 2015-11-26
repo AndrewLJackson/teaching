@@ -15,6 +15,13 @@ rm(list=ls()) # remove everything currently held in the R memory
 
 graphics.off() # close all open graphics windows 
 
+# store the original working directory so we can revert at the end of this
+# script.
+orig.path <- getwd() 
+
+# set working directory
+setwd(file.path(orig.path, "podcasts/graphs"))
+
 
 # -------------------------------------------------------------------
 # Enter or read in your data from a file
@@ -31,8 +38,8 @@ graphics.off() # close all open graphics windows
 
 #brain.data <- read.csv("brain_data.csv", header=TRUE)
 
-# make the data directly accessible by the column headers
-attach(iris)
+# load the data for this example
+data(iris)
 
 
 # --------------------------------------------------------------------
@@ -42,28 +49,35 @@ attach(iris)
 head(iris)
 
 # we will focus on the Petal Length data for a start
-dev.new()
-mu <- tapply(Petal.Length,Species,mean)
 
-centres<-barplot(mu, names.arg=names(mu),ylim=c(0,7),
-                  las=1,xlab="Species",ylab="Petal Length (cm)",
-                  cex.lab=1.2,cex.axis=1.2)
+mu <- tapply(iris$Petal.Length, iris$Species, mean)
 
-# Now add the error bars on top.
+centres<-barplot(mu, names.arg = names(mu),
+                 ylim = c(0,7), las = 1, 
+                 xlab = "Species", 
+                 ylab = "",
+                 cex.lab = 1.2, cex.axis = 1.2)
+
+# add the ylabel manually so we can specify its location a bit closer to the 
+# axis than default
+mtext("Petal Length (cm)", side = 2, line = 2.5, cex = 1.2)
+
+# Now add some error bars on top.
 #
-# first create our own function to calculate standard error of a vector of
-# numbers in a hypothetical vector named "x".
+# first create our own function to calculate standard error of the mean of 
+# a vector of numbers in a hypothetical vector named "x".
 std.error <- function (x) {return(sqrt(var(x)/length(x)))}
 
 # then apply this function across a tabulated data of petal lengths grouped by
 # Species 
-se <- tapply(Petal.Length,Species,std.error)
+se <- tapply(iris$Petal.Length, iris$Species, std.error)
 
 # and use the plotting function arrows() to draw arrows with flat heads on each 
 # end which are essentially vertical lines with T-shaped tops and bottoms.. 
 # i.e. errorbars.
-arrows( x0= centres, x1=centres, y0=mu+se, y1=mu-se,
-         code=3, length=0.3, angle=90,lwd=2)
+arrows( x0 = centres, x1 = centres, 
+        y0 = mu + se, y1 = mu - se,
+        code = 3, length = 0.3, angle = 90, lwd = 2)
 
 
 
@@ -89,7 +103,7 @@ arrows( x0= centres, x1=centres, y0=mu+se, y1=mu-se,
 
 # -------------------------------------------------------------------
 # Housekeeping - Cleaning up
-detach(iris)
+setwd(orig.path)
 
 
 
