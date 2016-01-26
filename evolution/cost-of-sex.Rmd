@@ -1,0 +1,91 @@
+---
+title: "Cost of Sex"
+author: "Andrew L Jackson"
+date: "January 26, 2016"
+output: html_document
+---
+
+In her research seminar on 22 Januar 2016, 
+[Prof Hanna Kokko](http://www.ieu.uzh.ch/en/staff/professors/kokko.html) 
+left a little bit of
+maths for us to do. After showing us how sexual reproduction incurs a two-fold 
+cost over a comparable asexual strategy, she presented data from [Sibly et al 
+(2012)](#sibly) that indicates that male-only care in birds results in a 20% 
+lower rate 
+of production. Prof Kokko said that her interpretation of this was that the 
+actual cost of sex in birds was therefore 1.6 times the asexual strategy 
+and not two-fold. Here we work through the maths of this.
+
+Firstly, we need to remind ourselves of the derivation of the two-fold cost of 
+sex. Lets assume that a population of asexual females is at carrying capacity. 
+Every female is getting an equal share of the available resources, and each 
+female can use her share to make 1 offspring. That is, the per capita 
+reproductive output $W_a = 1$, where $W$ denotes the percapita reproductive 
+output, and the subscript $a$ denotes *asexual* reproduction. This represents the 
+*best case scenario* for reproduction for this hypothetical species.
+
+
+Secondly, lets consider a comparable species that is identical in every way 
+except that it reproduces sexually. Now, at carrying capacity it takes one male 
+and one female to produce one offspring. *But*, in comparison to before, they 
+both need to harvest resources from the environment in order to produce this 
+offspring. In this scenario, the per capita reproductive output is 
+$W_{s} = 1/2$, where the subscript $s$ denotes *sexual* reproduction.
+This represents the *worst case scenario*.
+
+We can then simply observe that the cost of having sex in terms of reproductive 
+output is 
+
+$$\frac{W_{a}}{W_{s}} = \frac{1}{0.5} = 2$$
+
+In reality, it is likely that males perform some sort of positive fitness 
+benefit to the shared effort of raising offspring. 
+[Sibly et al (2012)](#sibly) 
+suggest that bird species with female-only parental care produce 20% 
+less offspring than those with biparental care. We need to do some maths to 
+work out what the relative cost of biparental care is relative to a purely 
+asexual scenario. Given that $W_{s} = 1/2 = 0.5$ we need to calculate $W_{b}$ 
+the productivity of a bi-parental care system, where the subscript $b$ denotes 
+*biparental care* reproduction.
+
+
+Some maths:
+
+We are told from [Sibly et al (2012)](#sibly)
+that $W_{s}$ is 20% less than $W_{b}$. 
+So...
+
+$$W_{s} = W_{b} - \frac{20}{100} * W_{b}$$
+
+This is fine, but we need to know what $W_{b}$ is and so need to re-arrange 
+this equation.
+
+$$W_{s} = W_{b} - 0.2 * W_{b}$$
+$$W_{s} = W_{b} * (1 - 0.2)$$
+$$W_{s} = W_{b} * 0.8$$
+$$\frac{W_{s}}{0.8} = W_{b}$$
+$$1.25 * W_{s} = W_{b}$$
+
+But we know from our hypothetical example above that $W_{s} = 0.5$ so 
+$$W_{b} = 1.25 * 0.5$$
+$$W_{b} = 0.625$$
+
+So, how does productivity of biparental care $W_{b}$ compare with a fully 
+asexual $W_{a}$ strategy?
+$$\frac{W_{a}}{W_{b}} = \frac{1}{0.625} = 1.6$$
+
+and so the birds that engage in biparental care of their offspring pay a 1.6 fold
+cost of having males compared with how resources could be utilised were females 
+able to reproduce on their own asexually.
+
+## References
+
+<a name="sibly"></a>Richard M. Sibly, Christopher C. Witt, Natalie A. Wright, 
+Chris Venditti, Walter Jetz, and James H. Brown
+Energetics, lifestyle, and reproduction in birds
+PNAS 2012 109 (27) 10937-10941; published ahead of print May 21, 2012, 
+[doi](http://dx.doi.org/10.1073/pnas.1206512109)
+
+
+
+
