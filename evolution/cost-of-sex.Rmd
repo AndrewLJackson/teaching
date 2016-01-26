@@ -5,7 +5,7 @@ date: "January 26, 2016"
 output: html_document
 ---
 
-In her research seminar on 22 Januar 2016, 
+In her research seminar on 22 January 2016, 
 [Prof Hanna Kokko](http://www.ieu.uzh.ch/en/staff/professors/kokko.html) 
 left a little bit of
 maths for us to do. After showing us how sexual reproduction incurs a two-fold 
