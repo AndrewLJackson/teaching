@@ -27,7 +27,7 @@ offspring. In this scenario, the per capita reproductive output is $W_{s} =
 1/2$, where the subscript $s$ denotes *sexual* reproduction. This represents the
 *worst case scenario*.
 
-We can then simply observe that the cost of having sex in terms of reproductive 
+We can then simply observe that the cost of sex in terms of reproductive 
 output is
 
 $$\frac{W_{a}}{W_{s}} = \frac{1}{0.5} = 2$$
