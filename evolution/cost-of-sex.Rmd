@@ -55,14 +55,22 @@ $$W_{s} = W_{b} - \frac{20}{100} * W_{b}$$
 This is fine, but we need to know what $W_{b}$ is and so need to re-arrange this
 equation.
 
-$$W_{s} = W_{b} - 0.2 * W_{b}$$ $$W_{s} = W_{b} * (1 - 0.2)$$ $$W_{s} = W_{b} *
-0.8$$ $$\frac{W_{s}}{0.8} = W_{b}$$ $$1.25 * W_{s} = W_{b}$$
+$$W_{s} = W_{b} - 0.2 * W_{b}$$ 
 
-But we know from our hypothetical example above that $W_{s} = 0.5$ so $$W_{b} =
-1.25 * 0.5$$ $$W_{b} = 0.625$$
+Factor out $W_{b}$ from the right hand side and then re-arrange to 
+isolate $W_{b}$
+
+$$W_{s} = W_{b} * (1 - 0.2)$$ 
+$$W_{s} = W_{b} *0.8$$ 
+$$\frac{W_{s}}{0.8} = W_{b}$$ $$1.25 * W_{s} = W_{b}$$
+
+We know from our hypothetical example above that $W_{s} = 0.5$ so 
+$$W_{b} =1.25 * 0.5$$ $$W_{b} = 0.625$$
 
 So, how does productivity of biparental care $W_{b}$ compare with a fully 
-asexual $W_{a}$ strategy? $$\frac{W_{a}}{W_{b}} = \frac{1}{0.625} = 1.6$$
+asexual $W_{a}$ strategy? 
+
+$$\frac{W_{a}}{W_{b}} = \frac{1}{0.625} = 1.6$$
 
 and so the birds that engage in biparental care of their offspring pay a 1.6
 fold cost of having males compared with how resources could be utilised were
