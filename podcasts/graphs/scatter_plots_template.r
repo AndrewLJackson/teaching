@@ -15,10 +15,11 @@ graphics.off() # close all open graphics windows
 
 # store the original working directory so we can revert at the end of this
 # script.
-orig.path <- getwd() 
+#orig.path <- getwd() 
 
 # set working directory
-setwd(file.path(orig.path, "podcasts/graphs"))
+#setwd(file.path(orig.path, "podcasts/graphs"))
+#setwd("~/Documents")
 
 # -------------------------------------------------------------------
 # Enter or read in your data from a file
@@ -63,7 +64,8 @@ plot( Petal.Length ~ Petal.Width, data = iris,
 
 # add a line of best fit through the points
 # see podcast on linear regression for more details.
-abline(glm(Petal.Length~Petal.Width, data = iris), col="black", lwd=2, lty=1)
+abline(glm(Petal.Length~Petal.Width, data = iris), 
+       col="black", lwd=2, lty=1)
 
 
 # include information on the different species
@@ -134,7 +136,7 @@ lines(c(2.2, 2.5),
 
 # -------------------------------------------------------------------
 # Housekeeping - Cleaning up
-setwd(orig.path)
+#setwd(orig.path)
 
 
 
