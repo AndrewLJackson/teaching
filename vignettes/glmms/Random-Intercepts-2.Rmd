@@ -10,7 +10,7 @@ We can extend the concept of the variance partitioning model by including additi
 
 ## Some simulated data
 
-need to explain the data here
+The data simulated here comprise repeated measures of the same individual (or individuals nested within a group) whose response variable $y$ changes linearly with covariate $x$. The groups of data points have the same simulated slope, but have different intercepts which we will model with our random slopes model.
 
 ```{r sim-data}
 rm(list=ls())
