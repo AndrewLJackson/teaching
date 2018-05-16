@@ -81,4 +81,4 @@ females able to reproduce on their own asexually.
 <a name="sibly"></a>Richard M. Sibly, Christopher C. Witt, Natalie A. Wright, 
 Chris Venditti, Walter Jetz, and James H. Brown Energetics, lifestyle, and
 reproduction in birds PNAS 2012 109 (27) 10937-10941; published ahead of print
-May 21, 2012, [doi](http://dx.doi.org/10.1073/pnas.1206512109)
+May 21, 2012, [doi](https://doi.org/10.1073/pnas.1206512109)

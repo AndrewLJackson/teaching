@@ -282,4 +282,4 @@ less than $1$?
 - $Metabolic Rate \propto Mass^{\frac{3}{4}}$
 - $Breathing rate or Heart rate \propto Mass^{\frac{1}{4}}$
 - $Abundance \propto Mass_{body}^{\frac{3}{4}}$
-    - [except parasites, which are weird!](http://dx.doi.org/10.1126%2Fscience.1204337)
+    - [except parasites, which are weird!](https://doi.org/10.1126%2Fscience.1204337)
