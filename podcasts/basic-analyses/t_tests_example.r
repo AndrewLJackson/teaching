@@ -53,7 +53,7 @@ welch.test.alternative <- t.test(finger.length[hand=="left"],finger.length[hand=
 # Ruxton, G.D. (2006) The unequal variance t-test is an 
 # underused alternative to Student's t-test and the 
 # Mann–Whitney U test. Behavioral Ecology, 17, 688-690.
-# http://dx.doi.org/10.1093/beheco/ark016
+# https://doi.org/10.1093/beheco/ark016
 
 
 
