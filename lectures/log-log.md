@@ -18,7 +18,7 @@ But now with log transformed data on the x and y axes
 
 
 
-![plot of chunk brain_regression_1](assets/fig/brain_regression_1-1.png) 
+![plot of chunk brain_regression_1](assets/fig/brain_regression_1-1.png)
 
 
 --- .class #id 
@@ -133,7 +133,7 @@ get longer.
 --- &vcenter
 
 ##  Mass - Length scaling in Finnish Fish
-![plot of chunk finnish_fish_1](assets/fig/finnish_fish_1-1.png) 
+![plot of chunk finnish_fish_1](assets/fig/finnish_fish_1-1.png)
 
 
 --- &radio
@@ -165,7 +165,7 @@ in $\log_{10}(M)$
 
 *** {name: right}
 
-![plot of chunk finnish_fish_2](assets/fig/finnish_fish_2-1.png) 
+![plot of chunk finnish_fish_2](assets/fig/finnish_fish_2-1.png)
 
 --- &radio
 ## Question
@@ -204,7 +204,7 @@ approximate doubling in $Mass$
 
 *** {name: right}
 
-![plot of chunk finnish_fish_3](assets/fig/finnish_fish_3-1.png) 
+![plot of chunk finnish_fish_3](assets/fig/finnish_fish_3-1.png)
 
 --- &two-cols w1:48% w2:48% bg:yellow
 ## Return to brain size evolution
@@ -230,7 +230,7 @@ approximate doubling in $Mass$
 
 *** {name: right}
 
-![plot of chunk brain_regression_2](assets/fig/brain_regression_2-1.png) 
+![plot of chunk brain_regression_2](assets/fig/brain_regression_2-1.png)
 
 --- &radio
 ## Question
@@ -271,7 +271,7 @@ less than $1$?
 
 *** {name: right}
 
-![plot of chunk brain_regression_3](assets/fig/brain_regression_3-1.png) 
+![plot of chunk brain_regression_3](assets/fig/brain_regression_3-1.png)
 
 --- .class #id 
 
@@ -283,3 +283,19 @@ less than $1$?
 - $Breathing rate or Heart rate \propto Mass^{\frac{1}{4}}$
 - $Abundance \propto Mass_{body}^{\frac{3}{4}}$
     - [except parasites, which are weird!](http://dx.doi.org/10.1126%2Fscience.1204337)
+    - blank
+- blank
+
+test
+
+--- .class #id 
+
+##  Key learning outcomes
+
+> - Describe how change on a log scale affects the raw numbers
+> - Linearise the allometric equation using log transformations
+> - Use the equations fitted to data on log-log scale to make statements about proportional change in the response variable (y axis) as a function of proportional change in the covariates (x axis)
+
+
+
+

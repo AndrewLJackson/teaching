@@ -18,7 +18,7 @@ But now with log transformed data on the x and y axes
 
 ```{r setup, echo = FALSE}
 # set some global knitr build options, notably the default figure size
-knitr::opts_chunk$set(collapse = TRUE, comment = "#-", 
+knitr::opts_chunk$set(collapse = TRUE, comment = "#-",
                       fig.width = 5, fig.height = 5)
 
 # load the viridis package for pretty and accessible colours especially for those with 
@@ -442,3 +442,19 @@ abline(glm(log10(brain)~log10(body), data = mydata), col = 1, lwd = 2 )
 - $Breathing rate or Heart rate \propto Mass^{\frac{1}{4}}$
 - $Abundance \propto Mass_{body}^{\frac{3}{4}}$
     - [except parasites, which are weird!](http://dx.doi.org/10.1126%2Fscience.1204337)
+    - blank
+- blank
+
+test
+
+--- .class #id 
+
+##  Key learning outcomes
+
+> - Describe how change on a log scale affects the raw numbers
+> - Linearise the allometric equation using log transformations
+> - Use the equations fitted to data on log-log scale to make statements about proportional change in the response variable (y axis) as a function of proportional change in the covariates (x axis)
+
+
+
+
