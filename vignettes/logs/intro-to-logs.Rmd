@@ -1,8 +1,8 @@
 ---
 title: "Introduction to logarithms"
 author: "Andrew L Jackson"
-date: "24 September 2015"
-output: html_document
+date: "`r format(Sys.Date(), '%d-%b-%Y')`"
+output: html_notebook
 # or use the following output option instead to get a pdf document
 # output: pdf_document
 ---
@@ -169,7 +169,7 @@ saveGIF(linLogTrans(y, log.y, base=10, steps=100), interval = 0.2,
 What we see here is an animation of the body mass data from our table above (voles to whales). The y-axis indicates the $log_{10}$ body masses. The x-axis starts off with the points located on the raw kilogram scale with all the small ones bunched up, and then skewed with a long tail out towards the bigger animals that get progressively further apart. The data points on the x-axis then move towards their ultimate position on their corresponding $log_{10}$ scale while retaining their labelling in kilograms. This animation starts at time `t = 1` and progresses to conclusion somewhere arbitrarily around 't = 316'. The notation `x^(1/t)` just refers to the animation process of where the data points are at time `t` compared to its end point of `x` during of the animation process. At `t = 1`, `x^(1/1) = x` which is our raw data.  Given all we have just covered in this tutorial, you might be able to guess (work out) why `t = 300` is a reasonable stopping point? What you can see to whales). On the y-axis is the $log_{10}$ transformed body mass. The raw data start off on the x-axis where they would be on raw data scale. The yellow vertical lines let you see how the body mass for large animals become compressed, while the smaller body masses get stretched out during the transformation.
 
 
-## Its time for that talk on the birds and er... mammals
+## Interpreting our body mass data
 One then needs to bear this in mind when interpreting differences on log transformed data. Take this comparison between the body masses of some birds and mammals (not a great comparison from an insight point of view, but it makes the point). 
 
 ```{r}
@@ -200,7 +200,7 @@ As we just saw with the example of what differences between two numbers on log s
     - N.B. this one is ***really*** important for understanding linear regressions on log-transformed data.
 
 
-## (Re-) Capitulation
+## Summary
 
 - log transformations are commonly used to "fix" skewed data and make them normal(-ish).
 - they are not magic.

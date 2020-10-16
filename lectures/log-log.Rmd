@@ -3,6 +3,7 @@ title       : Log-Log Regression
 subtitle    : Allometric, and other scaling
 author      : Andrew Jackson
 job         : Associate Professor
+date        : "`r format(Sys.Date(), '%d-%b-%Y')`"
 framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
 highlighter : highlight.js  # {highlight.js, prettify, highlight}
 hitheme     : tomorrow      # 

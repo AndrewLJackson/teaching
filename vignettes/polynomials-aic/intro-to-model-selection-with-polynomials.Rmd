@@ -2,7 +2,7 @@
 title: "Introduction to AIC-based Model Selection using polynomials"
 author: "Andrew L Jackson"
 date: "24 November 2015"
-output: html_document
+output: html_notebook
 ---
 
 ```{r, echo = FALSE}
@@ -153,6 +153,8 @@ with respect to `effort`. On to a second-order polynomial.
 
 In order to include the square of effort in the model, the easiest thing to do 
 is add a column to our dataset and include this term in our `glm()`.
+
+
 
 ```{r, echo = TRUE}
 

@@ -1,0 +1,32 @@
+---
+title: "testing inline maths not rendering"
+output: html_notebook
+---
+
+
+```{r setup}
+library(tidyverse)
+library(kableExtra) # for pretty table printing
+library(broom)
+```
+
+
+```{r}
+
+dd <- data.frame(x = 1:10, y = letters[1:10])
+
+dd %>% 
+  kable() %>%
+  kable_styling(protect_latex = TRUE, full_width = FALSE)
+
+
+```
+
+inline maths doesn't work with the call to `kable_styling` e.g. $5x$
+
+but standalone does
+
+$$5x$$
+
+
+

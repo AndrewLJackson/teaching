@@ -1,0 +1,305 @@
+---
+title: "Linear Regression with different log transformations "
+author: "Andrew L Jackson"
+date: "`r format(Sys.Date(), '%d-%b-%Y')`"
+output: html_notebook
+# or use the following output option instead to get a pdf document
+# output: pdf_document
+---
+
+
+
+If we consider a situation where we have two linear vectors of data on a linear scale we would expect to have a scatter plot as a representation of the relationship between the two variables. We would then typically look to fit linear regressions on the data in order to model this relationship and make statistical statements about that relationship. We often find ourselves transforming the data using logs and it is important to understand how this affects our interpreation of the fitted models. There are four scenarios:
+
+1) linear-linear (this is a simple regression analysis): $y \propto x$
+2) log-linear: $\log(y) \propto x$
+3) linear-log $y \propto \log(x)$
+4) log-log (typical of allometric studies): $\log(y) \propto \log(x)$
+
+Here we will run through these four scenarios and explore how the different transformations change our interpretation of the fitted models, and point out some cautionary situations where we need to be careful not to compare directly models fitted between some of these models.
+
+
+## Setup
+
+Load a few packages used in this analysis.
+
+```{r setup, message=FALSE}
+
+library(tidyverse) # for plotting and piping
+library(kableExtra) # for pretty table printing
+library(broom) # for making tidy tables
+library(patchwork) # for pretty and easy panel plots
+
+# we also set the random see so we get the same numebrs each time we 
+# run this script.
+set.seed(2)
+```
+
+## Generate some data
+
+First we generate some random data to work with. Here we simulate some data as coming from a log-log relationship, but we will use the exact same data throughout to explore how our interpretation of the analysis changes with the various transformation combinations. In a real setting, we would probably have good *a priori* reasons to make some of the transformations. In a completely naive scenario, we would fit various models and select among them *a posteriori* tools (which we will meet later in the module).
+
+Specifically here I generate data according to the allometric (log-log) equation:
+
+$$\log_{10}(y) = \beta_0 + \beta_1\log_{10}(x) + N(0,\sigma^2)$$
+
+```{r}
+
+# number of observations to generate
+n <- 30
+
+# generate some x data from a random uniform distribution
+x <- runif(n, 0.1, 100)
+
+# define a slope and intercept 
+b0 <- 1     # intercept
+b1 <- 0.25 # slope
+
+# define residual error as standard deviation
+sigma <- 0.2
+
+# generate y
+y <- 10 ^ (b0 + b1 * log10(x) + rnorm(n, 0, sigma))
+
+# bundle them into a data.frame for ease of plotting and modelling
+dd_df <- data.frame(x, y)
+
+```
+
+
+
+
+## 1) linear-linear
+
+We will not dwell on this scenario since it is covered extensively in other elements of this module. Basically here we plot two variables, $x$ and $y$ against each other and fit a linear model. We can then simply plot one against the other and fit a linear model.
+
+```{r}
+
+# fit a linear model to the raw data
+m_linear <- glm(y ~x, data = dd_df)
+
+# plot the raw data and add a linear fit
+g_linear <- ggplot(data = dd_df, 
+                   mapping = aes(x = x, 
+                                 y = y)) + 
+  geom_point() + 
+  geom_smooth(method = "lm") + 
+  ggtitle("linear-linear")
+  # scale_x_log10() + 
+  # scale_y_log10()
+
+print(g_linear)
+
+```
+
+And the summary table of the fitted model:
+
+```{r}
+
+# here we take the fitted model tidy it up from a function in the broom 
+# package and print using kable and specify 2 decimal places.
+m_linear %>% 
+  broom::tidy() %>% 
+  kable(digits = 2, format = "html") #%>%
+  # kable_styling
+
+```
+
+From this fitted model we can see that the slope of $x$ is `r round(coef(m_linear)[2], 2)`. Because the data are drawn on the raw data scale, and the model is fitted to the same raw data, the interpretation is that the effects of $x$ on $y$ are additive and linear. That means that a 1 unit increase in the $x$ variable, corresponds to a `r round(coef(m_linear)[2], 2)` change in $y$. Similarly, a 5 unit change in $x$, corresponds to a $5 \times `r round(coef(m_linear)[2], 2)` = `r 5 * round(coef(m_linear)[2], 2)`$ change in $y$.
+
+
+## 2) linear-log
+
+In this next approach, we transform the $x$ variable only so that we now explore the relationship $y \propto \log_{10}(x)$. Graphically, this has the following effect:
+
+```{r}
+
+# we take advantage of ggplots feature that allows us to build a new figure 
+# on the back of another and modify or overwrite some of the plotting rules.
+g_linear_log <- g_linear + scale_x_log10() + ggtitle("linear-log")
+
+# A slightly different approach would be to actually transform the x
+# varaible
+g_linear_log_alt <- g_linear + aes(x = log10(x)) + ggtitle("linear-log")
+
+
+
+print((g_linear_log | g_linear_log_alt))
+
+```
+
+Because we used the `ggplot2` function `scale_x_log10()` in the left hand panel, the effect is a bit subtle, but you can see that the scaling of the x-axis is no longer a simple additive scale from 0 to 100, and instead the distance from 10 to 30 is approximately the same as between 30 and 100. The same effect with different x-axis labelling is acheived by actually transforming  the $x$ variable in the right hand panel.
+
+Again we fit a linear model and generate a summary table,
+
+```{r}
+# fit a linear model to the raw data
+m_linear_log <- glm(y ~ log10(x), data = dd_df)
+
+# here we take the fitted model tidy it up from a function in the broom 
+# package and print using kable and specify 2 decimal places.
+m_linear_log %>% 
+  broom::tidy() %>% 
+  kable(digits = 2, format = "html") #%>%
+  # kable_styling
+
+
+```
+
+
+
+The numbers have clearly changed from the model fitted to the original data, and so too does our interpration. Owing to the log transformation on $x$, we how have a situation where a 1 unit increase in $\log_{10}(x)$ (and not $x$ itself) equates to a `r round(coef(m_linear_log)[2], 2)` change in $y$. The trick here is to realise that a 1 unit change in $\log_{10}(x)$ corresponds to a 10-fold increase in $x$. Effectively, by transforming $x$ we have created a model where a proportional chance in $x$ is equivalent to an additive (or straight line) change in $y$. A 10-fold increase might be too large in the context of some data to consider and instead it might be more appropriate to convert our interpretation and consider the effect on $y$ if $x$ were to double. Effectively we are asking what is the difference between a reference value of $y$, and a corresponding new value of $y^*$ in which $x$ is doubled.
+
+The original equation is 
+
+$$y = \beta_0 + \beta_1\log_{10}(x)$$
+
+and if we double $x$ we can see we get simply 
+
+$$y^* = \beta_0 + \beta_1\log_{10}(2x)$$
+in which the only difference between $y$ and $y^*$ is the 2 appearing inside the $\log_{10}()$ function. We are then interested in the difference $y^* - y$ which tells us how much the doubling of $x$ has changed $y$.  We can then take advantage of the fact that *log of product = sum of logs*, or $\log(ax) = \log(a) + \log(x)$, which means that all but the $\log_{10}(2)$ on the right hand side cancels. 
+
+$$y^* - y =  (\beta_0 + \beta_1[\log_{10}(2x)]) - (\beta_0 + \beta_1\log_{10}(x))$$
+
+$$y^* - y =  (\beta_0 + \beta_1[\log_{10}(2) + \log_{10}(x) ]) - (\beta_0 + \beta_1\log_{10}(x))$$
+$$y^* - y = \beta_1 \log_{10}(2)$$
+which turns out to be nice a simple and we can now state that a doubling in $x$ results in a $`r round(coef(m_linear_log)[2], 2)` \times \log_{10}(2) = `r round(coef(m_linear_log)[2], 2)` \times `r round(log10(2), 2)` = `r round(coef(m_linear_log)[2], 2) * round(log10(2), 2)`$ additive change in $y$.
+
+
+## 3) log-linear
+
+In this case, we will transform y, but leave x on the original scale. In this case we are looking at the relationship $\log_{10}(y) \propto x$.
+
+**_A really important side note_** thing to note is that in this situation, we are no longer able to directly compare model fitting statistics that use likelihood such as AIC since we are not allowed compare models fit to different transformations of the response variable ($y$ in our case). These details are not covered here, and are available elsewhere in this module under topics invovling *model selection*. Also note that this issue does not arise as a problem for case 2 linear-log relationships since the response variable is the same as the linear-linear scenario. In this regard, only pairs of scenarios (1, 2) and (3, 4) can be compared directly using likelihood based approaches like AIC.
+
+```{r}
+
+# N.B TAKE GREAT CARE WITH THE NAMES OF OBJECTS WHICH ARE NOW
+# VERY SIMILAR TO THOSE ABOVE!!
+
+# we take advantage of ggplots feature that allows us to build a new figure 
+# on the back of another and modify or overwrite some of the plotting rules.
+g_log_linear <- g_linear + scale_y_log10() + 
+  ggtitle("log-linear")
+
+# A slightly different approach would be to actually transform the x
+# varaible
+g_log_linear_alt <- g_linear + aes(y = log10(y)) + ggtitle("log-linear")
+
+
+
+print((g_log_linear | g_log_linear_alt))
+
+```
+
+Note the similarities to scenario 2 above, except now the y axis is log10 transformed. The interpretation is also similar, except the effects are reversed, and we know have a situation where an additive (unit for example) change in $x$ leads to a proportional change in $y$. Again we fit a linear model and generate a summary table,
+
+```{r}
+# fit a linear model to the raw data
+m_log_linear <- glm(log10(y) ~ x, data = dd_df)
+
+# here we take the fitted model tidy it up from a function in the broom 
+# package and print using kable and specify 2 decimal places.
+m_log_linear %>% 
+  broom::tidy() %>% 
+  kable(digits = 2, format = "html") #%>%
+  # kable_styling
+
+
+```
+
+We now have a situation where a unit change in $x$ results in a  change in `r round(coef(m_log_linear)[2], 2)` in $\log_{10}(y)$ (and not y itself). Our approach to interpreting this effect has to be a little different compared with what we did above under **3) linear-log**. Again we define a new $y^*$ in which we we double $x$.
+
+$$\log_{10}(y) = \beta_0 + \beta_1(x)$$
+$$y = 10 ^ {(\beta_0 + \beta_1(x))}$$
+Again we use a rule of powers and logs that relates $a^{(c+d)} = a^ca^d$ to get
+
+$$y = 10 ^{\beta_0} 10^{\beta_1 x}$$
+From this we can see that a unit increase in $x$ will change $y$ multiplicatively by $10^{\beta_1}$ times. If this value is less than 1, then y will get proportionally smaller, and if it is larger than 1 it will get proportionally larger. We can also consider how a 10 unit change in $x$ will affect $y$ by calculating $10^{(\beta_1 \times 10)}$. Spefically in the case of our model where $\beta_1 = `r round(coef(m_log_linear)[2],2)`$, find that a one unit change in $x$ leads to $y$ increasing by a multiple of `r round(10 ^ coef(m_log_linear)[2],2)`, and that a 10 unit change in $x$ leads to a `r round(10 ^ (10 * coef(m_log_linear)[2]), 2)` multiplication of $y$.
+
+We can check this is the case by predicting the value of $y$ at specific values of $x$. Here we calculate $y$ at $x = [10, 20]$ which are ten units apart. We expect the difference here to match our maths above and lead to a proporortional change in $y$ of `r round(10 ^ (10 * coef(m_log_linear)[2]), 2)`.
+
+```{r}
+
+# predict y at x = 10 and x = 20
+y_hat <- 10 ^ predict(m_log_linear, newdata = data.frame(x = c(10, 20)), 
+              type = "response")
+
+```
+
+The predicted values of $\hat{y}$ are $(`r round(y_hat[1],2)`, `r round(y_hat[2],2)`)$ which gives a proportional change relative to the smallest value of $(`r round(y_hat[2],2)` /`r round(y_hat[1],2)`) = `r round(y_hat[2] / y_hat[1],2)`$ and matches our prediction.
+
+
+## 4) log-log
+
+Finally we have a situation where we have log transformed both the $x$ and $y$ variables. In biology this leads to a somewhat special class of models where we are modelling the allometric scaling of the two variables. This is commonly deployed to understand how traits such as brain mass scale with body mass, or metabolic rate with body mass etc... This analysis is covered in more detail elsewhere, but here we follow the same approach as used above. The model we are fitting log transforms both the $x$ and $y$ data: $\log_{10}(y) \propto \log_{10}(x)$.
+
+```{r}
+
+# N.B TAKE GREAT CARE WITH THE NAMES OF OBJECTS WHICH ARE NOW
+# VERY SIMILAR TO THOSE ABOVE!!
+
+# we take advantage of ggplots feature that allows us to build a new figure 
+# on the back of another and modify or overwrite some of the plotting rules.
+g_log_log <- g_linear + scale_y_log10() + scale_x_log10() + 
+  ggtitle("log-log")
+
+# A slightly different approach would be to actually transform the x
+# varaible
+g_log_log_alt <- g_linear + aes(x = log10(x), 
+                                    y = log10(y)) + 
+  ggtitle("log-log")
+
+
+
+print((g_log_log | g_log_log_alt))
+
+```
+We fit a linear model to these log transformed data.
+
+
+```{r}
+# fit a linear model to the raw data
+m_log_log <- glm(log10(y) ~ log10(x), data = dd_df)
+
+# here we take the fitted model tidy it up from a function in the broom 
+# package and print using kable and specify 2 decimal places.
+m_log_log %>% 
+  broom::tidy() %>% 
+  kable(digits = 2, format = "html") #%>%
+  # kable_styling
+
+
+```
+
+
+Specifically the model here is
+
+$$\log_{10}(y) = \beta_0 + \beta_1\log_{10}(x)$$
+This model is a little different in that it has direct interpretation if we remove the logs by raising both sides to the corresponding base. Here, we will raise both sides to base 10. Before doing so it helps to define $\beta_0 = \log_{10}(\alpha)$ which makes ones of the first steps easier to see. 
+
+$$\log_{10}(y) = \log_{10}(\alpha) + \beta_1\log_{10}(x)$$
+
+We note that the following is true for logs: $\log(z^k) = k\log(z)$, and so we write
+
+$$\log_{10}(y) = \log_{10}(\alpha) + \log_{10}(x^{\beta_1})$$
+
+We then use the *log of product is sum of logs* rule in reverse to get
+
+$$\log_{10}(y) = \log_{10}(\alpha x^{\beta_1})$$
+
+and finally we raise both sides to base 10 and observe that by log transforming both the $x$ and $y$ data we are effectively modelling the scaling relationship
+
+$$y = \alpha x ^ {\beta_1}$$
+where the slope of the straight line on the log-log scale is directly the scaling exponent, and the coefficient $\alpha$ is 10 to the power of the intercept of the straight line fitted to the log transformed data (both axes). This means that when we consider a proportional change to the $x$ axis, say a doubling, this corresponds directly to a proportional change in y of $2^{\beta_1}$. In the specifically case of the example above,  $2^{\beta_1} = 2^{`r round(coef(m_log_log)[2],2)`}$ we see then that a doubling of $x$ leads to a `r round(2^coef(m_log_log)[2], 2)` in $y$, and a 10-fold increase in $x$ would lead to a `r round(10^coef(m_log_log)[2], 2)` increase in $y$.
+
+
+```{r}
+
+# predict y at x = 10 and x = 20
+y_hat <- 10 ^ predict(m_log_log, newdata = data.frame(x = c(10, 20)), 
+              type = "response")
+
+```
+
+Again, we can satisfy ourselves that this interpretation is correct by checking (at least one for a start) examples. Consider again the effect of doubling $x$ from 10 to 20. We would expect a proportional change in $y$ by a multiplier of `r round(2^coef(m_log_log)[2], 2)`. The predicted value of $y$ when $x = 10$ is `r round(y_hat[1], 2)` and when $x = 20$ it is `r round(y_hat[2], 2)`, which leads to a proportional change of `r round(y_hat[2] / y_hat[1], 2)` which is exactly what we predicted. 
