@@ -299,4 +299,74 @@ you with it.
 argument for which polynomial best explains the data.
 
 
+## Quickly fit the higher order polynomials
+
+```{r}
+
+poly0 <- glm(richness ~ 1, 
+             data = mydata)
+
+poly1 <- glm(richness ~ effort, 
+             data = mydata)
+
+poly2 <- glm(richness ~ effort + I(effort^2), 
+             data = mydata)
+
+poly3 <- glm(richness ~ effort + I(effort^2) + I(effort^3), 
+             data = mydata)
+
+poly4 <- glm(richness ~ effort + I(effort^2) + I(effort^3) + I(effort^4), 
+             data = mydata)
+
+poly5 <- glm(richness ~ effort + I(effort^2) + I(effort^3) + I(effort^4) + 
+                     I(effort^5), 
+             data = mydata)
+
+poly6 <- glm(richness ~ effort + I(effort^2) + I(effort^3) + I(effort^4) + 
+                     I(effort^5) + I(effort^6), 
+             data = mydata)
+
+poly7 <- glm(richness ~ effort + I(effort^2) + I(effort^3) + I(effort^4) + 
+                     I(effort^5) + I(effort^6) + I(effort^7), 
+             data = mydata)
+
+poly8 <- glm(richness ~ effort + I(effort^2) + I(effort^3) + I(effort^4) + 
+                     I(effort^5) + I(effort^6) + I(effort^7) + I(effort^8), 
+             data = mydata)
+
+```
+
+Extract AIC for all
+
+```{r}
+
+AIC(poly0, poly1, poly2, poly3, poly4, poly5, poly6, poly7, poly8)
+
+```
+
+Polynomial order 5 is the most parsimonious based on AIC. Even though poly7 has the lowest AIC, it has 2 more parameters that poly5, and so would need to be more than $2 \times 2 = 4$ units lower, but it is only approximately 2.5 units lower.
+
+
+## Check residuals
+
+Assuming we did settle on poly5 as our selected model we would absolutely need to check the residuals before finalising our choice.
+
+```{r}
+
+# create a 2-panel plotting window for the diagnostics on the 
+# residuals
+par(mfrow=c(1,2))
+# histogram of the residuals...
+hist(resid(poly5), 15, col = 7)
+
+# plot of the residuals of the line as a function of effort
+plot(resid(poly5) ~ effort, data = mydata)
+abline(h = 0 , col = 6, lty = 2, lwd = 2)
+
+
+
+```
+
+
+
 
